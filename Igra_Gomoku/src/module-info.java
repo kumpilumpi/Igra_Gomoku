@@ -1,0 +1,2 @@
+module Igra_Gomoku {
+}
