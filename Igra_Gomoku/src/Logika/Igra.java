@@ -4,8 +4,8 @@ public class Igra {
 	
 	// velikost igralne plošče
 	public static final int Velikost = 15;
-	private Polje[][] plosca;  //igralno polje
-	public Igralec naPotezi;
+	private static Polje[][] plosca;  //igralno polje
+	public static Igralec naPotezi; // kdor je na potezi
 
 	
 	public Igra() {
@@ -39,20 +39,33 @@ public class Igra {
 	
 	
 	
-	public void naslednji() {
+	public static void naslednji() {
 		// spremeni igralca, ki je napotezi
-		if (this.naPotezi.equals(Igralec.X)) {
-			this.naPotezi = Igralec.O;	
+		if (naPotezi.equals(Igralec.X)) {
+			naPotezi = Igralec.O;	
 		} else {
-			this.naPotezi = Igralec.X;	
+			naPotezi = Igralec.X;	
 		}
 	}
 	
 	
-	public boolean jeLegalna(int vrsta, int stolpec) {
+	public static boolean jeLegalna(int vrsta, int stolpec) {
 		// preveri če je poteza legalna
-		if (plosca.
-		return true;
+		if (plosca[vrsta][stolpec].equals(Polje.PRAZNO) && vrsta < 15 && stolpec < 15) {
+			return true;
+		}else {
+			return false;
+		}
+		
+		
+	}
+	
+	public static Polje naPoteziPolje(Igralec igralec) {
+		if (naPotezi.equals(Igralec.O)){
+			return Polje.O;
+		}else {
+			return Polje.X;
+		}
 		
 	}
 	
@@ -60,7 +73,13 @@ public class Igra {
 	public static void poteza(int vrsta, int stolpec) {
 		// odigra potezo, spremeni kdo je napotezi
 		
+		if(jeLegalna(vrsta, stolpec)) {
+			plosca[vrsta][stolpec] = naPoteziPolje(naPotezi);
+			naslednji();
+		}
+		
 	}
+		
 	
 	
 	
