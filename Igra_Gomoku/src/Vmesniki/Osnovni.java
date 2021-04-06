@@ -1,7 +1,7 @@
 package Vmesniki;
 import Logika.Igra;
 
-// Vemsnik, ki v terminal izpisuje zadeve
+// Vmesnik, ki v terminal izpisuje zadeve
 
 public class Osnovni {
 	public Igra igra;
@@ -15,7 +15,7 @@ public class Osnovni {
 	
 	
 	public void izpisMreze() {
-		// v terminal izpise mrezo, 
+		// v terminal izpise mrezo
 		
 	}
 	
