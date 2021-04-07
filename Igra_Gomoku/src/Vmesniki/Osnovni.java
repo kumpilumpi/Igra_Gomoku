@@ -29,9 +29,9 @@ public class Osnovni {
 			System.out.print("Vpiši y koordinato poteze: ");
 			potezaY = scanner.nextInt() - 1;
 			
-			Koordinati novaPoteza = new Koordinati(potezaY, potezaX);
+			Koordinati trenutnaPoteza = new Koordinati(potezaY, potezaX);
 			
-			if (Igra.poteza(novaPoteza)){
+			if (Igra.poteza(trenutnaPoteza)){
 				printPlosca();
 			}
 			else System.out.print("Neveljavna poteza:");

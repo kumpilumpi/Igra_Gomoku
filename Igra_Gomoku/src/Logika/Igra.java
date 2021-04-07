@@ -98,8 +98,8 @@ public class Igra {
 			plosca[poteza.getX()][poteza.getY()] = naPoteziPolje(naPotezi);
 			naslednji();
 			return true;
-		} 
-		else return false;
+		}
+		else {return false;}
 	}
 	
 	
