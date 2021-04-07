@@ -64,9 +64,8 @@ public class Igra {
 		// spremeni igralca, ki je napotezi
 		if (naPotezi.equals(Igralec.X)) {
 			naPotezi = Igralec.O;	
-		} else {
-			naPotezi = Igralec.X;	
-		}
+		} 
+		else naPotezi = Igralec.X;
 	}
 	
 	
@@ -74,9 +73,8 @@ public class Igra {
 		// preveri če je poteza legalna
 		if (plosca[poteza.getX()][poteza.getY()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
-		}else {
-			return false;
-		}		
+		}
+		else return false;
 	}
 	
 	

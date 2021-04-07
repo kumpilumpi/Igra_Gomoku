@@ -25,11 +25,11 @@ public class Osnovni {
 		while(preostalePoteze != null) {
 			
 			System.out.print("Vpiši x koordinato poteze: ");
-			potezaX = scanner.nextInt();
+			potezaX = scanner.nextInt() - 1;
 			System.out.print("Vpiši y koordinato poteze: ");
-			potezaY = scanner.nextInt();
+			potezaY = scanner.nextInt() - 1;
 			
-			Koordinati novaPoteza = new Koordinati(potezaX, potezaY);
+			Koordinati novaPoteza = new Koordinati(potezaY, potezaX);
 			
 			if (Igra.poteza(novaPoteza)){
 				printPlosca();
