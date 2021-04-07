@@ -8,7 +8,7 @@ public class Igra {
 	
 	// VELIKOST igralne plošče
 	public static int velikost;
-	private static Polje[][] plosca;  //igralno polje
+	public  static Polje[][] plosca;  //igralno polje
 	private static Igralec naPotezi; // kdor je na potezi
 	
 	public Stanje stanje;
