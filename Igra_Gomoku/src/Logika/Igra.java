@@ -99,7 +99,7 @@ public class Igra {
 			naslednji();
 			return true;
 		}
-		else {return false;}
+		else return false;
 	}
 	
 	
