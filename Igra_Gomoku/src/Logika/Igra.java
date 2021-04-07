@@ -2,16 +2,19 @@ package Logika;
 
 import java.util.LinkedList;
 
+import splosno.Koordinati;
+
 public class Igra {
 	
 	// VELIKOST igralne plošče
-	public static final int VELIKOST = 15;
+	public static int velikost;
 	private static Polje[][] plosca;  //igralno polje
 	private static Igralec naPotezi; // kdor je na potezi
 	
-	public Stanje stanje; 
+	public Stanje stanje;
 	
-	public static LinkedList<Poteza> odigranePoteze; // ?????????????? 
+	public static LinkedList<Koordinati> odigranePoteze;
+	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
 		 *  in za preverjanje kdaj bo konec igre.
@@ -19,21 +22,26 @@ public class Igra {
 		 */
 		 
 	
-	// =========================================
+	// ========================================= konstruktorji
 	
 	public Igra() {
-		
+		this(15);
+	}
+	
+	public Igra(int n) {
+		velikost = n;
 		this.stanje = Stanje.V_TEKU;
+				
+				plosca = new Polje[velikost][velikost];
+				
+				for (int i = 0; i < velikost; i++) {
+					for (int j = 0; j < velikost; j++) {
+						plosca[i][j] = Polje.PRAZNO;
+					}
+				}
+				
+				naPotezi = Igralec.O;
 		
-		plosca = new Polje[VELIKOST][VELIKOST];
-		
-		for (int i = 0; i < VELIKOST; i++) {
-			for (int j = 0; j < VELIKOST; j++) {
-				plosca[i][j] = Polje.PRAZNO;
-			}
-		}
-		
-		naPotezi = Igralec.O;	
 	}
 
 	// =========================================
@@ -42,10 +50,10 @@ public class Igra {
 		// preveri, če je kje pet v vrsto 
 		
 		return false;
-		
 	}
 	
-	public Stanje stanje() { // imamo tudi spremenljivko stanje
+	public Stanje stanje() { 
+	// imamo tudi spremenljivko stanje
 	// Posodobi stanje igre
 		return Stanje.V_TEKU;
 		
@@ -62,9 +70,9 @@ public class Igra {
 	}
 	
 	
-	public static boolean jeLegalna(int vrsta, int stolpec) {
+	public static boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
-		if (plosca[vrsta][stolpec].equals(Polje.PRAZNO) && vrsta < 15 && stolpec < 15) {
+		if (plosca[poteza.getX()][poteza.getY()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
 		}else {
 			return false;
@@ -82,28 +90,38 @@ public class Igra {
 	}
 	
 	
-	public static void poteza(int vrsta, int stolpec) {
-		// naredi potezo, spremeni kdo je napotezi
-		// legalnost poteze bo potrebno preverjati drugje, v vmesniku, ko poberemo potezo od igralca
+	public static boolean poteza(Koordinati poteza) { 
+		/**
+		 * javno metodo boolean odigraj(Koordinati koordinati), 
+		 * ki odigra potezo razreda Koordinati, če je možna. 
+		 * Metoda naj vrne true, če je poteza možna, sicer pa false.alca
+		 */
 		
-		if(jeLegalna(vrsta, stolpec)) {
-			plosca[vrsta][stolpec] = naPoteziPolje(naPotezi);
+		if(jeLegalna(poteza)) {
+			plosca[poteza.getX()][poteza.getY()] = naPoteziPolje(naPotezi);
 			naslednji();
-		}
+			return true;
+		} else { return false; }
 	}
 	
 	
-	public static int[][] moznePoteze() {
+	public static LinkedList<Koordinati> moznePoteze() {
 		/**
-		 * Vrne seznam možnih potez. V obliki int int list, kjer je notranji seznam
-		 * seznam parov števil [vrsta, stolpec] ???
-		 * Ali se splača uvesti class koordiant, ki ima dva atributa x,y kot vrsta stolpec??
+		 * Vrne vse mozne poteze kot seznam koordinat
 		 */
-		int[][] mozne = new int[VELIKOST * VELIKOST][2];
 		
+		LinkedList<Koordinati> mozne = new LinkedList<Koordinati>();
 		
+		for ( int x = 0; x < velikost; x++ ) {
+			for ( int y = 0; y < velikost; y++ ) {
+				if (plosca[x][y] == Polje.PRAZNO) {
+					mozne.add(new Koordinati(x,y));
+				}
+			}
+		}
 		return mozne;
 	}
+	
 	
 	public static void razveljaviPotezo() {
 		// meotda predlagana na spletni pod opisom projekta
