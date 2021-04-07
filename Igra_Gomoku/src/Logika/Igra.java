@@ -84,9 +84,8 @@ public class Igra {
 		// pretvori Igralec.O -> Polje.O
 		if (naPotezi.equals(Igralec.O)){
 			return Polje.O;
-		}else {
-			return Polje.X;
 		}
+		else return Polje.X;
 	}
 	
 	
@@ -101,7 +100,8 @@ public class Igra {
 			plosca[poteza.getX()][poteza.getY()] = naPoteziPolje(naPotezi);
 			naslednji();
 			return true;
-		} else { return false; }
+		} 
+		else return false;
 	}
 	
 	
