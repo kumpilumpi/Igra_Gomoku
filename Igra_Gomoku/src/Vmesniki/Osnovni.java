@@ -36,7 +36,7 @@ public class Osnovni {
 			}
 			else System.out.print("Neveljavna poteza:");
 		}
-		
+		scanner.close();
 		return;		
 	}
 //izpis igralne plošče v terminalu
