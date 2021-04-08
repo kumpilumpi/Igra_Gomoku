@@ -95,7 +95,7 @@ public class Igra {
 		 */
 		
 		if(jeLegalna(poteza)) {
-			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
+			plosca[poteza.getX()][poteza.getY()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();
 			return true;
 		}
