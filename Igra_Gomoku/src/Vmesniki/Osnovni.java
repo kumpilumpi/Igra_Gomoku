@@ -29,7 +29,7 @@ public class Osnovni {
 			System.out.print("Vpiši y koordinato poteze: ");
 			potezaY = scanner.nextInt() - 1;
 			
-			Koordinati trenutnaPoteza = new Koordinati(potezaY, potezaX);
+			Koordinati trenutnaPoteza = new Koordinati(potezaX, potezaY);
 			
 			if (Igra.poteza(trenutnaPoteza)){
 				printPlosca();
