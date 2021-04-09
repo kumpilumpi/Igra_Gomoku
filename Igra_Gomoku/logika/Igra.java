@@ -22,15 +22,16 @@ public class Igra {
 		 */
 		 
 	
-	// ========================================= konstruktorja
+	// Konstruktorja ========================================= 
 	
 	public Igra() {
 		this(15);
 	}
 	
 	public Igra(int n) {
-		velikost = n;
+		velikost = n;	
 		this.stanje = Stanje.V_TEKU;
+		this.odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
 				
 				plosca = new Polje[velikost][velikost];
 				
@@ -39,38 +40,95 @@ public class Igra {
 						plosca[i][j] = Polje.PRAZNO;
 					}
 				}
-				
 				naPotezi = Igralec.O;
-		
 	}
 
+	// ================ Komentarji =========================
+	
+	/**
+	 * Koordinatah( koordinate poteze) je koordinata.y vrsta, koordinata.x stolpec
+	 * (0,0) je levi zgornji kot plosce
+	 * Ko dostopamo do Polja v seznamu plosca je prvi indeks vrsta(Y), drugi indeks stolpec(X)
+	 */
+	
+	/**
+	 * Vprašanja?
+	 * 
+	 * Ali je pri primerjanju objekta tipa Polje vredu == ali potrebno .equals() ?
+	 * 
+	 */
+	
 	// =========================================
 	
-	public boolean petVrsta() {
-		// preveri, če je zadnja odigrana poteza kje postavila pet v vrsto
-		Koordinati poteza = odigranePoteze.getLast();
+	
+	// Pet v vrsto =============================
+	// Ni še preverjeno
+	
+	public boolean pomozna (int v0, int s0, int dv, int ds, Polje kdo) {
+	/**
+	 * v0 - začetna vrstica / s0 - zacetni stolpec / dv - sprememba vrstica / ds sprememba stolpca / kdo - za kogar preverja ali je pet v vrsti
+	 * Preveri če se od danega indeksa v devetih korakih v dani smeri pojavi 5 v vrsto
+	 */
 		
-		for ( int i = 0 ; i < 5 ; i++) { // vse začetne pozicije
-			try { // problem če bo IndexOutOfBounds
-				
-				//stolpec
-				for (int j = 1; i<5; i++) {
-					if(plosca[poteza.getX() + i][poteza.getY()] == plosca[poteza.getX() + i + 1][poteza.getY()]) {
+		int zaporedni = 0; //steje kolikokrat se zaporedoma pojavi iskano polje
+		
+		for( int i = 0; i < 9; i++ ) {
+			
+			try {
+				if(plosca[v0 + i*dv][s0 + i*ds].equals(kdo)) {
+					++zaporedni;
+				}else{
+					if(zaporedni > 4) {
 						return true;
+					}else{
+						zaporedni = 0;
 					}
 				}
-				
-				
-			}finally {
+			}catch(IndexOutOfBoundsException e){
 				continue;
 			}
-			
 		}
-			return false;	
-		
+		return false;
 	}
 	
+	
+	public boolean petVrsta() {
+		/**
+		 * Preveri, če je zadnja odigrana poteza postavila pet v vrsto
+		 */
+		
+		Koordinati poteza = odigranePoteze.getLast();
+		Polje kdo = plosca[poteza.getY()][poteza.getX()];
+		int v0 = poteza.getY() - 4;
+		if(v0 < 0) {v0 = 0;} // če negativna nastavi na 0
+		int s0 = poteza.getX() - 4;
+		if(s0 < 0) {s0 = 0;}
+		
+		//stolpec
+		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, 0, kdo)) {
+			return true;			
+		}
+		//vrstica
+		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 0, 1, kdo)) {
+			return true;			
+		}
+		//leva diagonala (levo zgoraj)
+		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, 1, kdo)) {
+			return true;			
+		}
+		//desna diagonala
+		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, -1, kdo)) {
+			return true;			
+		}
+		else {
+			return false;
+		}		
+	}
+	
+	// =========================================
+	
 	public void stanje() { 
+		
 	// imamo tudi spremenljivko stanje
 	// Posodobi stanje igre
 		
@@ -130,7 +188,7 @@ public class Igra {
 		
 		for ( int x = 0; x < velikost; x++ ) {
 			for ( int y = 0; y < velikost; y++ ) {
-				if (plosca[x][y] == Polje.PRAZNO) {
+				if (plosca[x][y].equals(Polje.PRAZNO)) {
 					mozne.add(new Koordinati(x,y));
 				}
 			}
@@ -145,7 +203,7 @@ public class Igra {
 		
 		Koordinati poteza = odigranePoteze.getLast();
 		odigranePoteze.removeLast();		
-		plosca[poteza.getX()][poteza.getY()] = Polje.PRAZNO;
+		plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
 	}
 		
 

@@ -1,11 +1,11 @@
-package Vmesniki;
+package vmesniki;
+import logika.*;
+import splosno.Koordinati;
 
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import Logika.Igra;
-import Logika.Polje;
-import splosno.Koordinati;
+
 
 // Vmesnik, ki v terminal izpisuje zadeve
 
@@ -18,7 +18,13 @@ public class Osnovni {
 		igra = new Igra();
 		int potezaX;
 		int potezaY;
-		LinkedList<Koordinati> preostalePoteze = Igra.moznePoteze();
+		/**
+		 * Mogoče se bi bolj splačalo pogledati samo dolžino odigranePoteze, 
+		 * mozne poteze vsakič znova preveri celotno polje
+		 * ?
+		 * @jaka
+		 */
+		LinkedList<Koordinati> preostalePoteze = Igra.moznePoteze(); 
 		printPlosca();
 		Scanner scanner = new Scanner(System.in);
 		
@@ -39,7 +45,7 @@ public class Osnovni {
 		scanner.close();
 		return;		
 	}
-//izpis igralne plošče v terminalu
+	//izpis igralne plošče v terminalu
     public static void printPlosca() {
 
         for (int i = 0; i < 15; ++i) {
