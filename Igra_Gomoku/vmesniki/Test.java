@@ -1,4 +1,4 @@
-package Vmesniki;
+package vmesniki;
 
 public class Test {
 	
