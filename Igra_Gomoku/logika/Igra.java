@@ -17,7 +17,7 @@ public class Igra {
 	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
-		 *  in za preverjanje kdaj bo konec igre.
+		 *  in za preverjanje kdaj bo konec igre.0000000000
 		 *  če shranjujemo poteze lahko preverjamo kje je pet v vrsto samo na zadnji potezi.
 		 */
 		 
@@ -25,13 +25,13 @@ public class Igra {
 	// Konstruktorja ========================================= 
 	
 	public Igra() {
-		this(15);
+		this(7);
 	}
 	
 	public Igra(int n) {
 		velikost = n;	
 		this.stanje = Stanje.V_TEKU;
-		this.odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
+		odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
 				
 				plosca = new Polje[velikost][velikost];
 				
@@ -56,17 +56,21 @@ public class Igra {
 	 * 
 	 * Ali je pri primerjanju objekta tipa Polje vredu == ali potrebno .equals() ?
 	 * 
+	 * static? -> dostopanje na statičen način ?? 
+	 * 
 	 */
 	
 	// =========================================
 	
 	
-	// Pet v vrsto =============================
-	// Ni še preverjeno
+	// Pet v vrsto =======================================
+	// Na pol preverjeno - nisem še najdel napake, pa tud nism siguren, da je brez napak
 	
-	public boolean pomozna (int v0, int s0, int dv, int ds, Polje kdo) {
+	public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // pomozna funkcija, če je negativni int vrne 0, drugače int
+	
+	public boolean pomozna (int v0, int s0, int dv, int ds, Polje primerjava) {
 	/**
-	 * v0 - začetna vrstica / s0 - zacetni stolpec / dv - sprememba vrstica / ds sprememba stolpca / kdo - za kogar preverja ali je pet v vrsti
+	 * v0 - začetna vrstica / s0 - zacetni stolpec / dv - sprememba vrstica / ds sprememba stolpca / kdo - za kogar preverja ali je pet v vrsto
 	 * Preveri če se od danega indeksa v devetih korakih v dani smeri pojavi 5 v vrsto
 	 */
 		
@@ -75,7 +79,7 @@ public class Igra {
 		for( int i = 0; i < 9; i++ ) {
 			
 			try {
-				if(plosca[v0 + i*dv][s0 + i*ds].equals(kdo)) {
+				if(plosca[v0 + i*dv][s0 + i*ds].equals(primerjava)) {
 					++zaporedni;
 				}else{
 					if(zaporedni > 4) {
@@ -88,7 +92,11 @@ public class Igra {
 				continue;
 			}
 		}
-		return false;
+		if(zaporedni > 4) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	
@@ -98,26 +106,26 @@ public class Igra {
 		 */
 		
 		Koordinati poteza = odigranePoteze.getLast();
-		Polje kdo = plosca[poteza.getY()][poteza.getX()];
-		int v0 = poteza.getY() - 4;
-		if(v0 < 0) {v0 = 0;} // če negativna nastavi na 0
-		int s0 = poteza.getX() - 4;
-		if(s0 < 0) {s0 = 0;}
 		
-		//stolpec
-		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, 0, kdo)) {
+		int v0 = poteza.getY();
+		int s0 = poteza.getX();
+		Polje primerjava = plosca[poteza.getY()][poteza.getX()];		
+		
+		//stolpec : zacetek (-4,0) sprememba (1,0)
+		if (pomozna(v0 - 4, s0, 1, 0, primerjava)) { 	// Kordinati.Y -> Vrstica
+			//System.out.print(false);
 			return true;			
 		}
-		//vrstica
-		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 0, 1, kdo)) {
+		//vrstica : zacetek (0,-4) spermemba (0,1)
+		if (pomozna(v0, s0 -4, 0, 1, primerjava)) {
 			return true;			
 		}
-		//leva diagonala (levo zgoraj)
-		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, 1, kdo)) {
+		//leva diagonala : zacetek (-4,-4) sprememba (1,1)
+		if (pomozna(v0 - 4, s0 - 4, 1, 1, primerjava)) {
 			return true;			
 		}
-		//desna diagonala
-		if(pomozna(poteza.getX() - 4, poteza.getY() - 4, 1, -1, kdo)) {
+		//desna diagonala : zecetek (-4,4) sprememba (1,-1)
+		if (pomozna(v0 - 4, s0 + 4, 1, -1, primerjava)) {
 			return true;			
 		}
 		else {
@@ -125,14 +133,23 @@ public class Igra {
 		}		
 	}
 	
-	// =========================================
-	
 	public void stanje() { 
+	/**
+	 * posodobi igra.stanje -> ZMAGA_X, ZMAGA_O, NEODLOCENO
+	 */
 		
-	// imamo tudi spremenljivko stanje
-	// Posodobi stanje igre
-		
+		if(this.petVrsta()) {
+			Koordinati poteza = odigranePoteze.getLast();
+			Polje primerjava = plosca[poteza.getY()][poteza.getX()];
+			
+			this.stanje = (primerjava.equals(Polje.O)) ? Stanje.ZMAGA_O : Stanje.ZMAGA_X ;
+		}
+		if (odigranePoteze.size() == velikost * velikost) {
+			this.stanje = Stanje.NEODLOCENO;
+		}
 	}
+	
+	// =========================================
 	
 	
 	public static void naslednji() {
@@ -146,7 +163,7 @@ public class Igra {
 	
 	public static boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
-		if (plosca[poteza.getX()][poteza.getY()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
+		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
 		}
 		else return false;
