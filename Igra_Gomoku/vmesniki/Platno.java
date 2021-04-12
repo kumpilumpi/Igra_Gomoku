@@ -82,7 +82,7 @@ class Platno extends JPanel {
 				for (int c=0; c<COLS; c++) {
 					int x = c * CELL_SIZE;
 					int y = r * CELL_SIZE;
-					Polje polje = Igra.plosca[r][c];
+					Polje polje = igra.plosca[r][c];
 					if (polje != Polje.PRAZNO) {
 						if(polje == Polje.X) g.setColor(Color.BLACK);
 						else g.setColor(Color.WHITE);
@@ -99,7 +99,7 @@ class Platno extends JPanel {
 			int row = e.getY()/CELL_SIZE;
 			Koordinati trenutnaPoteza = new Koordinati(col, row);
          
-			if (igra.stanje.equals(Stanje.V_TEKU) && Igra.poteza(trenutnaPoteza)) {
+			if (igra.stanje.equals(Stanje.V_TEKU) && igra.poteza(trenutnaPoteza)) {
 				igra.stanje();
 				this.repaint();  // Show any updates to game.
 				showNextPlayer();
@@ -127,7 +127,7 @@ class Platno extends JPanel {
  
 	//======================================= untility method showNextPlayer
  	private void showNextPlayer() {
- 		if(Igra.naPotezi == Igralec.X)
+ 		if(igra.naPotezi == Igralec.X)
  			stanjeIgre.setText("Na vrsti je črni igralec.");
  		else stanjeIgre.setText("Na vrsti je beli igralec.");
  	}//end showNextPlayer
@@ -143,7 +143,7 @@ class Platno extends JPanel {
  	}//end inner class NewGameAction
  	private class UndoAction implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
- 			Igra.razveljaviPotezo();
+ 			igra.razveljaviPotezo();
  			showNextPlayer();
  			prikazplosce.repaint();
  		}
