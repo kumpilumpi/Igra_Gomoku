@@ -42,6 +42,7 @@ class Platno extends JPanel {
      
 		//-- Add action listeners
 		newGameButton.addActionListener(new NewGameAction());
+		undoButton.addActionListener(new UndoAction());
 	}//end constructor
 
  //////////////////////////////////////////////// class GraphicsPanel
@@ -135,10 +136,17 @@ class Platno extends JPanel {
 ///////////////////////////////////////// inner class NewGameAction
  	private class NewGameAction implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
-        igra = new Igra();
-        showNextPlayer();
-        prikazplosce.repaint();
+ 			igra = new Igra();
+ 			showNextPlayer();
+ 			prikazplosce.repaint();
  		}
  	}//end inner class NewGameAction
+ 	private class UndoAction implements ActionListener {
+ 		public void actionPerformed(ActionEvent e) {
+ 			Igra.razveljaviPotezo();
+ 			showNextPlayer();
+ 			prikazplosce.repaint();
+ 		}
+ 	}//end inner class UndoAction
  	
 }//end class Platno
