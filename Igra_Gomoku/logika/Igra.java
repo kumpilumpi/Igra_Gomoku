@@ -217,10 +217,13 @@ public class Igra {
 	public static void razveljaviPotezo() {
 		// meotda predlagana na spletni pod opisom projekta
 		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
-		
-		Koordinati poteza = odigranePoteze.getLast();
-		odigranePoteze.removeLast();		
-		plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
+		if(!odigranePoteze.isEmpty()) {
+			Koordinati poteza = odigranePoteze.getLast();
+			odigranePoteze.removeLast();		
+			plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
+			naslednji();
+		}
+		return;
 	}
 		
 
