@@ -7,46 +7,52 @@ import splosno.Koordinati;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 
 class Platno extends JPanel {
- //=============================================== instance variables
- private GraphicsPanel prikazplosce;
- private JTextField    stanjeIgre = new JTextField();
- private Igra igra = new Igra();
- private Stanje stanje = Stanje.V_TEKU;
+ /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+//=============================================== instance variables
+	private GraphicsPanel prikazplosce;
+	private JTextField    stanjeIgre = new JTextField();
+	public Igra igra = new Igra();
 
  //====================================================== constructor
- public Platno() {
-     //--- Create some buttons
-     JButton newGameButton = new JButton("New Game");
-     JButton undoButton = new JButton("Undo");
+	public Platno() {
+		//--- Create some buttons
+		JButton newGameButton = new JButton("New Game");
+		JButton undoButton = new JButton("Undo");
 
-     //--- Create control panel
-     JPanel controlPanel = new JPanel();
-     controlPanel.setLayout(new FlowLayout());
-     controlPanel.add(newGameButton);
-     controlPanel.add(undoButton);
+		//--- Create control panel
+		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new FlowLayout());
+		controlPanel.add(newGameButton);
+		controlPanel.add(undoButton);
      
-     //--- Create graphics panel
-     prikazplosce = new GraphicsPanel();
+		//--- Create graphics panel
+		prikazplosce = new GraphicsPanel();
+		showNextPlayer();
+		//--- Set the layout and add the components
+		this.setLayout(new BorderLayout());
+		this.add(controlPanel , BorderLayout.NORTH);
+		this.add(prikazplosce, BorderLayout.CENTER);
+		this.add(stanjeIgre , BorderLayout.SOUTH);
      
-     //--- Set the layout and add the components
-     this.setLayout(new BorderLayout());
-     this.add(controlPanel , BorderLayout.NORTH);
-     this.add(prikazplosce, BorderLayout.CENTER);
-     this.add(stanjeIgre , BorderLayout.SOUTH);
-     
-     //-- Add action listeners
-     newGameButton.addActionListener(new NewGameAction());
- }//end constructor
+		//-- Add action listeners
+		newGameButton.addActionListener(new NewGameAction());
+	}//end constructor
 
  //////////////////////////////////////////////// class GraphicsPanel
  // This is defined inside the outer class so that
  // it can use the game logic variable.
  class GraphicsPanel extends JPanel implements MouseListener {
-     private static final int ROWS = 15;
+     /**
+	 * 
+	 */
+	 private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+	 private static final int ROWS = 15;
      private static final int COLS = 15;
      private static final int CELL_SIZE = 30; // Pixels
      private static final int WIDTH  = COLS * CELL_SIZE;
@@ -88,34 +94,28 @@ class Platno extends JPanel {
      //======================================== listener mousePressed
      public void mousePressed(MouseEvent e) {
          //--- map x,y coordinates into a row and col.
-         int col = e.getX()/CELL_SIZE;
-         int row = e.getY()/CELL_SIZE;
-         Koordinati trenutnaPoteza = new Koordinati(col, row);
+        int col = e.getX()/CELL_SIZE;
+        int row = e.getY()/CELL_SIZE;
+        Koordinati trenutnaPoteza = new Koordinati(col, row);
          
-         Polje igranoPolje = Igra.plosca[row][col];
-         if (stanje == Stanje.V_TEKU && Igra.poteza(trenutnaPoteza)) {
-             switch (igra.stanje) {
-             
-                 case ZMAGA_O: // Player one wins.  Game over.
-                         stanjeIgre.setText("BELI ZMAGA");
-                         break;
-                         
-                 case ZMAGA_X: // Player two wins.  Game over.
-                         stanjeIgre.setText("CRNI ZMAGA");
-                         break;
-                         
-                 case NEODLOCENO:  // Tie game.  Game over.
-                         stanjeIgre.setText("NEODLOCENO");
-                         break;
-                         
-                 default: showNextPlayer();
-             }
-                         
-         } else {  // Not legal
-             Toolkit.getDefaultToolkit().beep();
-         }
+        if (igra.stanje.equals(Stanje.V_TEKU) && Igra.poteza(trenutnaPoteza)) {
+        	 igra.stanje();
+        	 this.repaint();  // Show any updates to game.
+        	 showNextPlayer();
+        }
+        else Toolkit.getDefaultToolkit().beep();
+        
+        if (igra.stanje == Stanje.ZMAGA_O) {
+        	stanjeIgre.setText("BELI ZMAGA");
+		}
+		else if (igra.stanje == Stanje.ZMAGA_X) {
+			stanjeIgre.setText("CRNI ZMAGA");
+		}
+		
+		else if (igra.stanje == Stanje.NEODLOCENO) {
+			stanjeIgre.setText("NEODLOCENO");
+		}
          
-         this.repaint();  // Show any updates to game.
      }//end mousePressed
      
      //========================================== ignore these events
@@ -126,20 +126,20 @@ class Platno extends JPanel {
  }//end inner class GraphicsPanel
  
  //======================================= untility method showNextPlayer
- private void showNextPlayer() {
-	if(Igra.naPotezi == Igralec.X)
-		stanjeIgre.setText("Na vrsti je črni igralec.");
-	else stanjeIgre.setText("Na vrsti je črni igralec.");
- }//end showNextPlayer
+ 	private void showNextPlayer() {
+ 		if(Igra.naPotezi == Igralec.X)
+ 			stanjeIgre.setText("Na vrsti je črni igralec.");
+ 		else stanjeIgre.setText("Na vrsti je beli igralec.");
+ 	}//end showNextPlayer
      
  
  ///////////////////////////////////////// inner class NewGameAction
- private class NewGameAction implements ActionListener {
-     public void actionPerformed(ActionEvent e) {
-         igra = new Igra();
-         showNextPlayer();
-         prikazplosce.repaint();
-     }
- }//end inner class NewGameAction
-
-}//end class FiveGUI
+ 	private class NewGameAction implements ActionListener {
+ 		public void actionPerformed(ActionEvent e) {
+        igra = new Igra();
+        showNextPlayer();
+        prikazplosce.repaint();
+ 		}
+ 	}//end inner class NewGameAction
+ 	
+}//end class Platno
