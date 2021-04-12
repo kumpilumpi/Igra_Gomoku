@@ -34,7 +34,7 @@ public class Osnovni {
 			
 			Koordinati trenutnaPoteza = new Koordinati(potezaX, potezaY);
 			
-			if (Igra.poteza(trenutnaPoteza)){
+			if (trenutnaPoteza.getX() > 0 && trenutnaPoteza.getY() > 0 && trenutnaPoteza.getX() < 15 && trenutnaPoteza.getY() < 15 && Igra.poteza(trenutnaPoteza)){
 				printPlosca();
 				igra.stanje();
 			}

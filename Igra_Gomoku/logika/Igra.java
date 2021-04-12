@@ -163,7 +163,7 @@ public class Igra {
 	
 	public static boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
-		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
+		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO)) {
 			return true;
 		}
 		else return false;
