@@ -47,85 +47,84 @@ class Platno extends JPanel {
  //////////////////////////////////////////////// class GraphicsPanel
  // This is defined inside the outer class so that
  // it can use the game logic variable.
- class GraphicsPanel extends JPanel implements MouseListener {
+	class GraphicsPanel extends JPanel implements MouseListener {
      /**
 	 * 
 	 */
-	 private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
-	 private static final int ROWS = 15;
-     private static final int COLS = 15;
-     private static final int CELL_SIZE = 30; // Pixels
-     private static final int WIDTH  = COLS * CELL_SIZE;
-     private static final int HEIGHT = ROWS * CELL_SIZE;
+		private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+		private static final int ROWS = 15;
+		private static final int COLS = 15;
+		private static final int CELL_SIZE = 30; // Pixels
+		private static final int WIDTH  = COLS * CELL_SIZE;
+		private static final int HEIGHT = ROWS * CELL_SIZE;
      
-     //================================================== constructor
-     public GraphicsPanel() {
-         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-         this.setBackground(Color.GRAY);
-         this.addMouseListener(this);  // Listen own mouse events.
-     }//end constructor
+		//================================================== constructor
+		public GraphicsPanel() {
+			this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+			this.setBackground(Color.GRAY);
+			this.addMouseListener(this);  // Listen own mouse events.
+		}//end constructor
      
-     //============================================== paintComponent
-     public void paintComponent(Graphics g) {
-         super.paintComponent(g);
-         //-- Paint grid (could be done once and saved).
-         for (int r=1; r<ROWS; r++) {  // Horizontal lines
-             g.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
-         }
-         for (int c=1; c<COLS; c++) {
-             g.drawLine(c*CELL_SIZE, 0, c*CELL_SIZE, HEIGHT);
-         }
+		//============================================== paintComponent
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			//-- Paint grid (could be done once and saved).
+			for (int r=1; r<ROWS; r++) {  // Horizontal lines
+				g.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
+			}
+			for (int c=1; c<COLS; c++) {
+				g.drawLine(c*CELL_SIZE, 0, c*CELL_SIZE, HEIGHT);
+			}
          
-         //-- Draw players pieces.
-         for (int r=0; r<ROWS; r++) {
-             for (int c=0; c<COLS; c++) {
-                 int x = c * CELL_SIZE;
-                 int y = r * CELL_SIZE;
-                 Polje polje = Igra.plosca[r][c];
-                 if (polje != Polje.PRAZNO) {
-                	 if(polje == Polje.X) g.setColor(Color.BLACK);
-                	 else g.setColor(Color.WHITE);
-                     g.fillOval(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
-                 }
-             }
-         }
-     }//end paintComponent
+			//-- Draw players pieces.
+			for (int r=0; r<ROWS; r++) {
+				for (int c=0; c<COLS; c++) {
+					int x = c * CELL_SIZE;
+					int y = r * CELL_SIZE;
+					Polje polje = Igra.plosca[r][c];
+					if (polje != Polje.PRAZNO) {
+						if(polje == Polje.X) g.setColor(Color.BLACK);
+						else g.setColor(Color.WHITE);
+						g.fillOval(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
+					}
+				}
+			}
+		}//end paintComponent
      
-     //======================================== listener mousePressed
-     public void mousePressed(MouseEvent e) {
-         //--- map x,y coordinates into a row and col.
-        int col = e.getX()/CELL_SIZE;
-        int row = e.getY()/CELL_SIZE;
-        Koordinati trenutnaPoteza = new Koordinati(col, row);
+		//======================================== listener mousePressed
+		public void mousePressed(MouseEvent e) {
+			//--- map x,y coordinates into a row and col.
+			int col = e.getX()/CELL_SIZE;
+			int row = e.getY()/CELL_SIZE;
+			Koordinati trenutnaPoteza = new Koordinati(col, row);
          
-        if (igra.stanje.equals(Stanje.V_TEKU) && Igra.poteza(trenutnaPoteza)) {
-        	 igra.stanje();
-        	 this.repaint();  // Show any updates to game.
-        	 showNextPlayer();
-        }
-        else Toolkit.getDefaultToolkit().beep();
+			if (igra.stanje.equals(Stanje.V_TEKU) && Igra.poteza(trenutnaPoteza)) {
+				igra.stanje();
+				this.repaint();  // Show any updates to game.
+				showNextPlayer();
+			}
+			else Toolkit.getDefaultToolkit().beep();
         
-        if (igra.stanje == Stanje.ZMAGA_O) {
-        	stanjeIgre.setText("BELI ZMAGA");
-		}
-		else if (igra.stanje == Stanje.ZMAGA_X) {
-			stanjeIgre.setText("CRNI ZMAGA");
-		}
+			if (igra.stanje == Stanje.ZMAGA_O) {
+				stanjeIgre.setText("BELI ZMAGA");
+			}
+			else if (igra.stanje == Stanje.ZMAGA_X) {
+				stanjeIgre.setText("CRNI ZMAGA");
+			}
 		
-		else if (igra.stanje == Stanje.NEODLOCENO) {
-			stanjeIgre.setText("NEODLOCENO");
-		}
+			else if (igra.stanje == Stanje.NEODLOCENO) {
+				stanjeIgre.setText("NEODLOCENO");
+			}
          
-     }//end mousePressed
-     
-     //========================================== ignore these events
-     public void mouseClicked (MouseEvent e) {}
-     public void mouseReleased(MouseEvent e) {}
-     public void mouseEntered (MouseEvent e) {}
-     public void mouseExited  (MouseEvent e) {}
- }//end inner class GraphicsPanel
+		}//end mousePressed
+		//========================================== ignore these events
+		public void mouseClicked (MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered (MouseEvent e) {}
+		public void mouseExited  (MouseEvent e) {}
+	}//end inner class GraphicsPanel
  
- //======================================= untility method showNextPlayer
+	//======================================= untility method showNextPlayer
  	private void showNextPlayer() {
  		if(Igra.naPotezi == Igralec.X)
  			stanjeIgre.setText("Na vrsti je črni igralec.");
@@ -133,7 +132,7 @@ class Platno extends JPanel {
  	}//end showNextPlayer
      
  
- ///////////////////////////////////////// inner class NewGameAction
+///////////////////////////////////////// inner class NewGameAction
  	private class NewGameAction implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
         igra = new Igra();
