@@ -8,16 +8,18 @@ public class Igra {
 	
 	// VELIKOST igralne plošče
 	public static int velikost;
-	public  static Polje[][] plosca;  //igralno polje
-	public static Igralec naPotezi; // kdor je na potezi //spremenil v public @Teo
+	
+	public Polje[][] plosca;  //igralno polje
+	
+	public Igralec naPotezi; // kdor je na potezi
 	
 	public Stanje stanje;
 	
-	public static LinkedList<Koordinati> odigranePoteze;
+	public LinkedList<Koordinati> odigranePoteze;
 	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
-		 *  in za preverjanje kdaj bo konec igre.0000000000
+		 *  in za preverjanje kdaj bo konec igre
 		 *  če shranjujemo poteze lahko preverjamo kje je pet v vrsto samo na zadnji potezi.
 		 */
 		 
@@ -25,7 +27,7 @@ public class Igra {
 	// Konstruktorja ========================================= 
 	
 	public Igra() {
-		this(15);
+		this(7);
 	}
 	
 	public Igra(int n) {
@@ -57,6 +59,9 @@ public class Igra {
 	 * Ali je pri primerjanju objekta tipa Polje vredu == ali potrebno .equals() ?
 	 * 
 	 * static? -> dostopanje na statičen način ?? 
+	 * Bo to problem? Če prav razumem static pomeni, da je za vse instance of an object ista spremenljivka ali funkcija
+	 * 
+	 * Linkedlist.size() -> časovna zahtevnost?  ==> O(1), ni problem
 	 * 
 	 */
 	
@@ -92,11 +97,7 @@ public class Igra {
 				continue;
 			}
 		}
-		if(zaporedni > 4) {
-			return true;
-		}else{
-			return false;
-		}
+		return (zaporedni > 4) ? true : false;
 	}
 	
 	
@@ -138,21 +139,21 @@ public class Igra {
 	 * posodobi igra.stanje -> ZMAGA_X, ZMAGA_O, NEODLOCENO
 	 */
 		
-		if(this.petVrsta()) {
+		if(petVrsta()) {
 			Koordinati poteza = odigranePoteze.getLast();
 			Polje primerjava = plosca[poteza.getY()][poteza.getX()];
 			
-			this.stanje = (primerjava.equals(Polje.O)) ? Stanje.ZMAGA_O : Stanje.ZMAGA_X ;
+			stanje = (primerjava.equals(Polje.O)) ? Stanje.ZMAGA_O : Stanje.ZMAGA_X ;
 		}
 		if (odigranePoteze.size() == velikost * velikost) {
-			this.stanje = Stanje.NEODLOCENO;
+			stanje = Stanje.NEODLOCENO;
 		}
 	}
 	
 	// =========================================
 	
 	
-	public static void naslednji() {
+	public void naslednji() {
 		// spremeni igralca, ki je napotezi
 		if (naPotezi.equals(Igralec.X)) {
 			naPotezi = Igralec.O;	
@@ -161,25 +162,22 @@ public class Igra {
 	}
 	
 	
-	public static boolean jeLegalna(Koordinati poteza) {
+	public boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
-		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO)) {
+		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
 		}
 		else return false;
 	}
 	
 	
-	public static Polje naPoteziPolje(Igralec igralec) {
+	public Polje naPoteziPolje(Igralec igralec) {
 		// pretvori Igralec.O -> Polje.O
-		if (naPotezi.equals(Igralec.O)){
-			return Polje.O;
-		}
-		else return Polje.X;
+		return (naPotezi.equals(Igralec.O)) ? Polje.O : Polje.X;
 	}
 	
 	
-	public static boolean poteza(Koordinati poteza) { 
+	public boolean poteza(Koordinati poteza) { 
 		/**
 		 * javno metodo boolean odigraj(Koordinati koordinati), 
 		 * ki odigra potezo razreda Koordinati, če je možna. 
@@ -190,13 +188,14 @@ public class Igra {
 			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();
 			odigranePoteze.add(poteza); // doda odigrano potezo na seznam vseh odigranih potez
+			stanje();
 			return true;
 		}
 		else return false;
 	}
 	
 	
-	public static LinkedList<Koordinati> moznePoteze() {
+	public LinkedList<Koordinati> moznePoteze() {
 		/**
 		 * Vrne vse mozne poteze kot seznam koordinat
 		 */
@@ -213,8 +212,7 @@ public class Igra {
 		return mozne;
 	}
 	
-	
-	public static void razveljaviPotezo() {
+	public void razveljaviPotezo() {
 		// meotda predlagana na spletni pod opisom projekta
 		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
 		if(!odigranePoteze.isEmpty()) {
@@ -225,6 +223,4 @@ public class Igra {
 		}
 		return;
 	}
-		
-
 }
