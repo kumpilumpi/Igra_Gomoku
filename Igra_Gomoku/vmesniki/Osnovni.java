@@ -34,7 +34,7 @@ public class Osnovni {
 			
 			Koordinati trenutnaPoteza = new Koordinati(potezaX, potezaY);
 			
-			if (trenutnaPoteza.getX() > 0 && trenutnaPoteza.getY() > 0 && trenutnaPoteza.getX() < 15 && trenutnaPoteza.getY() < 15 && Igra.poteza(trenutnaPoteza)){
+			if (trenutnaPoteza.getX() > 0 && trenutnaPoteza.getY() > 0 && trenutnaPoteza.getX() < 15 && trenutnaPoteza.getY() < 15 && igra.poteza(trenutnaPoteza)){
 				printPlosca();
 				igra.stanje();
 			}
@@ -63,7 +63,7 @@ public class Osnovni {
             String out = "[";
 
          
-            Polje[] row = Igra.plosca[i];
+            Polje[] row = igra.plosca[i];
             for (int j = 0; j < 15; ++j) {
                 Polje v = row[j];
                 
