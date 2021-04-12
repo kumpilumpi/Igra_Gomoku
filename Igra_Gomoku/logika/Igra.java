@@ -27,7 +27,7 @@ public class Igra {
 	// Konstruktorja ========================================= 
 	
 	public Igra() {
-		this(15);
+		this(7);
 	}
 	
 	public Igra(int n) {
