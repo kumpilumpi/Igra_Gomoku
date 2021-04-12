@@ -1,10 +1,8 @@
 package vmesniki;
 import logika.*;
+
 import splosno.Koordinati;
-
-import java.util.LinkedList;
 import java.util.Scanner;
-
 
 
 // Vmesnik, ki v terminal izpisuje zadeve
@@ -18,17 +16,16 @@ public class Osnovni {
 		igra = new Igra();
 		int potezaX;
 		int potezaY;
-		/**
+		/**= 
 		 * Mogoče se bi bolj splačalo pogledati samo dolžino odigranePoteze, 
 		 * mozne poteze vsakič znova preveri celotno polje
 		 * ?
 		 * @jaka
 		 */
-		LinkedList<Koordinati> preostalePoteze = Igra.moznePoteze(); 
 		printPlosca();
 		Scanner scanner = new Scanner(System.in);
 		
-		while(preostalePoteze != null) {
+		while(igra.stanje == Stanje.V_TEKU) {
 			
 			System.out.print("Vpiši x koordinato poteze: ");
 			potezaX = scanner.nextInt() - 1;
@@ -39,8 +36,22 @@ public class Osnovni {
 			
 			if (Igra.poteza(trenutnaPoteza)){
 				printPlosca();
+				igra.stanje();
 			}
-			else System.out.print("Neveljavna poteza:");
+			else System.out.print("Neveljavna poteza! \n");
+			
+			if (igra.stanje == Stanje.ZMAGA_O) {
+				System.out.print("Zmaga Igralec O!");
+			}
+			else if (igra.stanje == Stanje.ZMAGA_X) {
+				System.out.print("Zmaga Igralec X!");
+			}
+			
+			else if (igra.stanje == Stanje.NEODLOCENO) {
+				System.out.print("Neodločen izid!");
+			}
+			
+			
 		}
 		scanner.close();
 		return;		
