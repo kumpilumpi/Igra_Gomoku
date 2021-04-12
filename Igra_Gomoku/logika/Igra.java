@@ -9,7 +9,7 @@ public class Igra {
 	// VELIKOST igralne plošče
 	public static int velikost;
 	public  static Polje[][] plosca;  //igralno polje
-	private static Igralec naPotezi; // kdor je na potezi
+	public static Igralec naPotezi; // kdor je na potezi //spremenil v public @Teo
 	
 	public Stanje stanje;
 	
