@@ -215,7 +215,7 @@ public class Igra {
 	public void razveljaviPotezo() {
 		// meotda predlagana na spletni pod opisom projekta
 		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
-		if(!odigranePoteze.isEmpty()) {
+		if(!odigranePoteze.isEmpty() && stanje.equals(Stanje.V_TEKU)) {
 			Koordinati poteza = odigranePoteze.getLast();
 			odigranePoteze.removeLast();		
 			plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
