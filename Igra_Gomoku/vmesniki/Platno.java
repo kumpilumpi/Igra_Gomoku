@@ -39,7 +39,13 @@ class Platno extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.add(controlPanel , BorderLayout.NORTH);
 		this.add(prikazplosce, BorderLayout.CENTER);
+		
+		
+		Font font1 = new Font("SansSerif", Font.BOLD, 18);
+		stanjeIgre.setFont(font1);
 		this.add(stanjeIgre , BorderLayout.SOUTH);
+		stanjeIgre.setHorizontalAlignment(JTextField.CENTER);
+		stanjeIgre.setEditable(false);
      
 		//-- Add action listeners
 		newGameButton.addActionListener(new NewGameAction());
@@ -133,8 +139,8 @@ class Platno extends JPanel {
 	//======================================= untility method showNextPlayer
  	private void showNextPlayer() {
  		if(igra.naPotezi == Igralec.X)
- 			stanjeIgre.setText("Na vrsti je črni igralec.");
- 		else stanjeIgre.setText("Na vrsti je beli igralec.");
+ 			stanjeIgre.setText("Na potezi je črni igralec");
+ 		else stanjeIgre.setText("Na potezi je beli igralec");
  	}//end showNextPlayer
      
  
