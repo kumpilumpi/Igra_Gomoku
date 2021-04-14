@@ -154,8 +154,10 @@ class Platno extends JPanel {
  	}//end inner class NewGameAction
  	private class UndoAction implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
+ 			if(igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
  			igra.razveljaviPotezo();
  			if (igra.stanje.equals(Stanje.V_TEKU)) showNextPlayer();
+ 			else Toolkit.getDefaultToolkit().beep();
  			prikazplosce.repaint();
  		}
  	}//end inner class UndoAction
