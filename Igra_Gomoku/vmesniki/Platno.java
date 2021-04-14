@@ -1,6 +1,5 @@
 package vmesniki;
 
-//FiveGUI.java
 import logika.*;
 import splosno.Koordinati;
 
@@ -8,13 +7,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
-
 class Platno extends JPanel {
  
-	private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+	private static final long serialVersionUID = 1L; // nevem kaj naredi,ni warninga
 
-//=============================================== instance variables
+//======================================================
 	private GraphicsPanel prikazplosce;
 	private JTextField    stanjeIgre = new JTextField();
 	public Igra igra = new Igra();
@@ -49,9 +46,9 @@ class Platno extends JPanel {
 		//-- doda action listeners
 		newGameButton.addActionListener(new NovaIgra());
 		undoButton.addActionListener(new Razveljavi());
-	}//end constructor
+	}
 
- //////////////////////////////////////////////// class GraphicsPanel
+//////////////////////////////////////////////// class GraphicsPanel
 
 	class GraphicsPanel extends JPanel implements MouseListener {
 		
@@ -61,13 +58,13 @@ class Platno extends JPanel {
 		private static final int CELL_SIZE = 30; // Pixels
 		private static final int WIDTH  = COLS * CELL_SIZE;
 		private static final int HEIGHT = ROWS * CELL_SIZE;
-		//================================================== constructor
+		
 		public GraphicsPanel() {
 			this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 			Color barvaPlosce = new Color(191, 128, 255); // custom barva
 			this.setBackground(barvaPlosce);
 			this.addMouseListener(this); // Listen own mouse events.
-		}//end constructor
+		}
      
 		//============================================== paintComponent
 		public void paintComponent(Graphics g) {
@@ -76,7 +73,7 @@ class Platno extends JPanel {
 			Color barvaTemen = new Color(0, 0, 38); // custom temna barva
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
 			super.paintComponent(g);
-			//-- Paint grid (could be done once and saved).
+			//-- Izris mreže.
 			for (int r=1; r<ROWS; r++) {        //vodoravne crte
 				g2.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
 			}
@@ -84,7 +81,7 @@ class Platno extends JPanel {
 				g2.drawLine(c*CELL_SIZE, 0, c*CELL_SIZE, HEIGHT);
 			}
          
-			//-- Draw players pieces.
+			//-- Nariše odigrane poteze na ploščo.
 			for (int r=0; r<ROWS; r++) {
 				for (int c=0; c<COLS; c++) {
 					int x = c * CELL_SIZE;
@@ -97,7 +94,7 @@ class Platno extends JPanel {
 					}
 				}
 			}
-		}//koncaj izrisPlosce
+		}
      
 		//======================================== listener mousePressed
 		public void mousePressed(MouseEvent e) {
@@ -124,30 +121,30 @@ class Platno extends JPanel {
 				stanjeIgre.setText("NEODLOCENO");
 			}
          
-		}//end mousePressed
+		}
 		//========================================== ignore these events
 		public void mouseClicked (MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 		public void mouseEntered (MouseEvent e) {}
 		public void mouseExited  (MouseEvent e) {}
-	}//end inner class GraphicsPanel
+	}//konec notranjega classa GraphicsPanel
  
-	//======================================= untility method showNextPlayer
+	//======================================= metoda za prikaz naslednjega igralca
  	private void showNextPlayer() {
  		if(igra.naPotezi == Igralec.X)
  			stanjeIgre.setText("Na potezi je črni igralec");
  		else stanjeIgre.setText("Na potezi je beli igralec");
- 	}//end showNextPlayer
+ 	}
      
  
-///////////////////////////////////////// inner class NovaIgra
+///////////////////////////////////////// notranji class NovaIgra
  	private class NovaIgra implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
  			igra = new Igra();
  			showNextPlayer();
  			prikazplosce.repaint();
  		}
- 	}//end inner class Nova Igra
+ 	}
  	
  	private class Razveljavi implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
@@ -157,6 +154,6 @@ class Platno extends JPanel {
  			else Toolkit.getDefaultToolkit().beep();
  			prikazplosce.repaint();
  		}
- 	}//end inner class UndoAction
+ 	}
  	
 }//end class Platno
