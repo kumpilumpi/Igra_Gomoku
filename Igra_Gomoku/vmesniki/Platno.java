@@ -11,31 +11,30 @@ import javax.swing.*;
 
 
 class Platno extends JPanel {
- /**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+
 //=============================================== instance variables
 	private GraphicsPanel prikazplosce;
 	private JTextField    stanjeIgre = new JTextField();
 	public Igra igra = new Igra();
 
- //====================================================== constructor
+//====================================================== konstruktor
 	public Platno() {
-		//--- Create some buttons
+		//--- Naredi gumbe
 		JButton newGameButton = new JButton("New Game");
 		JButton undoButton = new JButton("Undo");
 
-		//--- Create control panel
+		//--- Naredi control panel
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new FlowLayout());
 		controlPanel.add(newGameButton);
 		controlPanel.add(undoButton);
      
-		//--- Create graphics panel
+		//--- Naredi območje kjer bo igralna plošča
 		prikazplosce = new GraphicsPanel();
 		showNextPlayer();
-		//--- Set the layout and add the components
+		//--- Postavitev in dodajanje komponent
 		this.setLayout(new BorderLayout());
 		this.add(controlPanel , BorderLayout.NORTH);
 		this.add(prikazplosce, BorderLayout.CENTER);
@@ -47,19 +46,16 @@ class Platno extends JPanel {
 		stanjeIgre.setHorizontalAlignment(JTextField.CENTER);
 		stanjeIgre.setEditable(false);
      
-		//-- Add action listeners
-		newGameButton.addActionListener(new NewGameAction());
-		undoButton.addActionListener(new UndoAction());
+		//-- doda action listeners
+		newGameButton.addActionListener(new NovaIgra());
+		undoButton.addActionListener(new Razveljavi());
 	}//end constructor
 
  //////////////////////////////////////////////// class GraphicsPanel
- // This is defined inside the outer class so that
- // it can use the game logic variable.
+
 	class GraphicsPanel extends JPanel implements MouseListener {
-     /**
-	 * 
-	 */
-		private static final long serialVersionUID = 1L; //not sure kaj to naredi sam pol ni warninga
+		
+		private static final long serialVersionUID = 1L; // nevem kaj naredi,ni warninga
 		private static final int ROWS = 15;
 		private static final int COLS = 15;
 		private static final int CELL_SIZE = 30; // Pixels
@@ -78,10 +74,10 @@ class Platno extends JPanel {
 			Graphics2D g2 = (Graphics2D) g; //graphics 2d 
 			Color barvaSvetel = new Color(255, 255, 179); // custom svetla barva
 			Color barvaTemen = new Color(0, 0, 38); // custom temna barva
-			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //smooth krogi
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
 			super.paintComponent(g);
 			//-- Paint grid (could be done once and saved).
-			for (int r=1; r<ROWS; r++) {  // Horizontal lines
+			for (int r=1; r<ROWS; r++) {        //vodoravne crte
 				g2.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
 			}
 			for (int c=1; c<COLS; c++) {
@@ -101,7 +97,7 @@ class Platno extends JPanel {
 					}
 				}
 			}
-		}//end paintComponent
+		}//koncaj izrisPlosce
      
 		//======================================== listener mousePressed
 		public void mousePressed(MouseEvent e) {
@@ -144,15 +140,16 @@ class Platno extends JPanel {
  	}//end showNextPlayer
      
  
-///////////////////////////////////////// inner class NewGameAction
- 	private class NewGameAction implements ActionListener {
+///////////////////////////////////////// inner class NovaIgra
+ 	private class NovaIgra implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
  			igra = new Igra();
  			showNextPlayer();
  			prikazplosce.repaint();
  		}
- 	}//end inner class NewGameAction
- 	private class UndoAction implements ActionListener {
+ 	}//end inner class Nova Igra
+ 	
+ 	private class Razveljavi implements ActionListener {
  		public void actionPerformed(ActionEvent e) {
  			if(igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
  			igra.razveljaviPotezo();

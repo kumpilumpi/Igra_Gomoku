@@ -6,13 +6,12 @@ import javax.swing.JFrame;
 
 class Okno {
  //================================================ method main
- @SuppressWarnings("deprecation")
 public static void main(String[] args) {
-     JFrame window = new JFrame("Pet v vrsto");
-     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     window.setContentPane(new Platno());
-     window.pack();  // finalize layout
-     window.setResizable(false);
-     window.show();  // make window visible
+     JFrame okno = new JFrame("Pet v vrsto");
+     okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     okno.setContentPane(new Platno());
+     okno.pack();  // finalize layout
+     okno.setResizable(false);
+     okno.setVisible(true);  // make window visible
  }//end main
 }//endclass Okno
