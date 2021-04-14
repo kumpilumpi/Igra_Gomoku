@@ -11,7 +11,7 @@ class Okno {
 		okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		okno.setContentPane(new Platno());
 		okno.pack();
-		okno.setResizable(false);
+		okno.setResizable(true);
 		okno.setVisible(true);
 	}
 }
