@@ -245,6 +245,8 @@ public class Igra {
 	}
 	
 	
+
+	
 	public LinkedList<Koordinati> moznePoteze() {
 		/**
 		 * Vrne vse mozne poteze kot seznam koordinat

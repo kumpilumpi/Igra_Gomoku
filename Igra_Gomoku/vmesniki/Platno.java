@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class Platno extends JPanel {
+public class Platno extends JPanel {
  
 	private static final long serialVersionUID = 1L; // nevem kaj naredi,ni warninga
 
@@ -22,7 +22,7 @@ class Platno extends JPanel {
 		JButton newGameButton = new JButton("New Game");
 		JButton undoButton = new JButton("Undo");
 
-		//--- Naredi control panel
+		//--- Naredi control panel 
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new FlowLayout());
 		controlPanel.add(newGameButton);

@@ -1,0 +1,13 @@
+Opombe:
+
+- Dodajanje možnosti igranja proti računalniku
+	- Dodan package Vodja, po prefosorjevem zgledu.
+		- popravljene malenkosti, da se koda ujema z najinimi spremenljivkami.
+		- dodana inteligenca Naključna, samo izbere naključno potezo.
+		
+		- 
+		- 
+		
+	- V grafičnem vmesniku dodati možnost izbire nasprotnika.
+	- Rabiva metodo osveži. v classu okno
+	
