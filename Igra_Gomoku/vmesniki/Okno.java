@@ -71,7 +71,7 @@ public class Okno extends JFrame implements ActionListener {
 		poteza_menu.add(potezaRazveljavi);
 		potezaRazveljavi.addActionListener(this);
 		
-		// igralno polje
+		// igralno  polje
 		platno = new Platno();
 
 		GridBagConstraints polje_layout = new GridBagConstraints();
@@ -125,11 +125,11 @@ public class Okno extends JFrame implements ActionListener {
 						" - " + Vodja.vrstaIgralca.get(Vodja.igra.naPotezi)); 
 				break;
 			case ZMAGA_O: 
-				status.setText("Zmagal je O - " + 
+				status.setText("Zmagal je Beli - " + 
 						Vodja.vrstaIgralca.get(Igralec.O));
 				break;
 			case ZMAGA_X: 
-				status.setText("Zmagal je X - " + 
+				status.setText("Zmagal je Črni - " + 
 						Vodja.vrstaIgralca.get(Igralec.X));
 				break;
 			}

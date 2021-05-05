@@ -9,24 +9,12 @@ import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-
+//preuredil strukturo programa po profesorjevem zgledu
 class Platno extends JPanel implements MouseListener {
 	public Platno() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		Color barvaPlosce = new Color(191, 128, 255); // custom barva
 		this.setBackground(barvaPlosce);
-		
-		//--- Naredi control panel 
-		//JPanel controlPanel = new JPanel();
-		//JButton undoButton = new JButton("Undo");
-		//controlPanel.setLayout(new FlowLayout());
-		//controlPanel.add(undoButton);
-		//this.setLayout(new BorderLayout());
-		//this.add(controlPanel , BorderLayout.NORTH);
-		//this.add(this, BorderLayout.CENTER);
-	 
-		//-- doda action listeners
-		//undoButton.addActionListener(new Razveljavi());
 		this.addMouseListener(this); // Listen own mouse events.
 	}
 	public static Okno okno;

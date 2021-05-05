@@ -12,7 +12,7 @@ import logika.Igra;
 import logika.Igralec;
 
 
-//import inteligenca.Minimax;
+//import inteligenca.Minimax ;
 //import inteligenca.RandomMinimax;
 
 import splosno.Koordinati;
