@@ -1,11 +1,11 @@
 package vodja;
 
 public enum VrstaIgralca {
-	Racunalnik, Clovek;
+	R, C;
 	
 	@Override
 	public String toString() {
-		return (this.equals(Clovek)) ? "Človek" : "Računalnkik";		
+		return (this.equals(C)) ? "Človek" : "Računalnkik";		
 	}
 
 }

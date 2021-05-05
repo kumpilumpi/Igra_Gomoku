@@ -25,7 +25,7 @@ public class Vodja {
 	
 	public static Okno okno;
 	
-	public static Igra igra = null;
+	public static Igra igra;
 	
 	public static boolean clovekNaVrsti = false;
 		
@@ -45,10 +45,10 @@ public class Vodja {
 			Igralec igralec = igra.naPotezi;
 			VrstaIgralca vrstaNaPotezi = vrstaIgralca.get(igralec);
 			switch (vrstaNaPotezi) {
-			case Clovek: 
+			case C: 
 				clovekNaVrsti = true;
 				break;
-			case Racunalnik:
+			case R:
 				igrajRacunalnikovoPotezo ();
 				break;
 			}
