@@ -4,7 +4,15 @@ package vmesniki;
 import javax.swing.JFrame;
 
 
-class Okno {
+public class Okno {
+	
+	public static JFrame okno;
+	
+	public Okno() {
+		super();
+		JFrame okno = new JFrame("Pet v vrsto");
+	}
+	
  //================================================ main metoda
 	public static void main(String[] args) {
 		JFrame okno = new JFrame("Pet v vrsto");
@@ -13,5 +21,9 @@ class Okno {
 		okno.pack();
 		okno.setResizable(false);
 		okno.setVisible(true);
+	}
+	
+	public void osvezi() {
+		okno.repaint(); // ???
 	}
 }

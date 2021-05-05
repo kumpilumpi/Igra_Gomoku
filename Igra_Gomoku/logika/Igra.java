@@ -63,13 +63,15 @@ public class Igra {
 	 * 
 	 * Linkedlist.size() -> časovna zahtevnost?  ==> O(1), ni problem
 	 * 
+	 * 
 	 */
 	
 	// =========================================
 	
 	
+	
 	// Pet v vrsto =======================================
-	// Na pol preverjeno - nisem še najdel napake, pa tud nism siguren, da je brez napak
+	// Dela
 	
 	public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // pomozna funkcija, če je negativni int vrne 0, drugače int
 	
@@ -99,7 +101,7 @@ public class Igra {
 		}
 		return (zaporedni > 4) ? true : false;
 	}
-	
+		
 	
 	public boolean petVrsta() {
 		/**
@@ -110,7 +112,7 @@ public class Igra {
 		
 		int v0 = poteza.getY();
 		int s0 = poteza.getX();
-		Polje primerjava = plosca[poteza.getY()][poteza.getX()];		
+		Polje primerjava = plosca[poteza.getY()][poteza.getX()];
 		
 		//stolpec : zacetek (-4,0) sprememba (1,0)
 		if (pomozna(v0 - 4, s0, 1, 0, primerjava)) { 	// Kordinati.Y -> Vrstica
@@ -134,12 +136,60 @@ public class Igra {
 		}		
 	}
 	
+	//========================= Mogoče malo hitrejše iskanje pet v vrsto
+	//zgleda da deluje
+	
+	public boolean pomozna2 (int v0, int s0, int dv, int ds) {
+		
+		Polje primerjava = plosca[v0][s0];
+		int zaporedni = 1;
+		
+		
+		int[] smeri = new int[] {1,-1};
+		
+		for (int smer : smeri) { //preveri naprej in nazaj
+			
+			int i = 1;
+			dv = dv * smer;
+			ds = ds * smer;
+			try {
+				while((zaporedni < 5) && (plosca[v0 + i*dv][s0 + i*ds].equals(primerjava))) {
+				i++;
+				zaporedni++;
+				}
+			}catch (IndexOutOfBoundsException e) {
+				continue;
+			}
+			
+		}
+		
+		return (zaporedni < 5) ? false : true;	
+	}
+	
+	public boolean petVrsta2() {
+		Koordinati poteza = odigranePoteze.getLast();
+		int v0 = poteza.getY();
+		int s0 = poteza.getX();
+		
+		int[][] smeri = new int[][] {{1,0},{0,1},{1,1},{1,-1}};
+		
+		for (int[] smer : smeri) {
+			if (pomozna2(v0, s0, smer[0], smer[1])) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+//========
+	
 	public void stanje() { 
 	/**
 	 * posodobi igra.stanje -> ZMAGA_X, ZMAGA_O, NEODLOCENO
 	 */
 		
-		if(petVrsta()) {
+		if(petVrsta2()) {
 			Koordinati poteza = odigranePoteze.getLast();
 			Polje primerjava = plosca[poteza.getY()][poteza.getX()];
 			
@@ -194,6 +244,8 @@ public class Igra {
 		else return false;
 	}
 	
+	
+
 	
 	public LinkedList<Koordinati> moznePoteze() {
 		/**
