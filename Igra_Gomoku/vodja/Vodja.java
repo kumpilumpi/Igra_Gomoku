@@ -1,16 +1,14 @@
 package vodja;
 
 import java.util.Map;
-
 import javax.swing.SwingWorker;
 import java.util.concurrent.TimeUnit;
-
 import vmesniki.Okno;
 import inteligenca.Inteligenca;
 import inteligenca.Nakljucna;
 import logika.Igra;
 import logika.Igralec;
-
+import logika.Stanje;
 
 //import inteligenca.Minimax ;
 //import inteligenca.RandomMinimax;
@@ -81,8 +79,8 @@ public class Vodja {
 	}
 		
 	public static void igrajClovekovoPotezo(Koordinati poteza) {
-		if (igra.poteza(poteza)) clovekNaVrsti = false;
-		igramo ();
+		if (igra.stanje.equals(Stanje.V_TEKU) && igra.poteza(poteza)) clovekNaVrsti = false; //preveri tudi stanje
+		igramo ();                                                                          //da ne moremo igrati po zmagi
 	}
 
 
