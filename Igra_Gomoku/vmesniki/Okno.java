@@ -98,21 +98,40 @@ public class Okno extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == igraClovekClovek) {
+		
+		if (e.getSource() == potezaRazveljavi) {
+			if (Vodja.igra != null) {	
+				if(Vodja.igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
+	 			else if (Vodja.igra.stanje.equals(Stanje.V_TEKU)) {
+	 				Vodja.igra.razveljaviPotezo();
+	 				osvezi();
+	 			}
+			}
+ 			Toolkit.getDefaultToolkit().beep();
+		}
+		else if (e.getSource() == igraClovekClovek) {
 			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
 			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.C); 
 			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.C);
 			Vodja.igramoNovoIgro();
 		}
-		
-		else if (e.getSource() == potezaRazveljavi) {
-			if (Vodja.igra != null) {	
-				if(Vodja.igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
-	 			else if (Vodja.igra.stanje.equals(Stanje.V_TEKU)) {
-	 				Vodja.igra.razveljaviPotezo();
-	 				osvezi();}
-			}
- 			Toolkit.getDefaultToolkit().beep();
+		else if (e.getSource() == igraClovekRacunalnik) {
+			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
+			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.C); 
+			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.R);
+			Vodja.igramoNovoIgro();
+			} 
+		else if (e.getSource() == igraRacunalnikClovek) {
+			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
+			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.R); 
+			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.C);
+			Vodja.igramoNovoIgro();
+		}
+		else if (e.getSource() == igraRacunalnikRacunalnik) {
+			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
+			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.R); 
+			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.R);
+			Vodja.igramoNovoIgro();
 		}
 	}
 	
