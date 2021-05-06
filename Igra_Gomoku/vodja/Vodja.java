@@ -23,7 +23,7 @@ public class Vodja {
 	
 	public static Okno okno;
 	
-	public static Igra igra;
+	public static Igra igra = null;
 	
 	public static boolean clovekNaVrsti = false;
 		

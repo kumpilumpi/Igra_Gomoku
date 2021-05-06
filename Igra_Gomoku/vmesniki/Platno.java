@@ -31,7 +31,6 @@ class Platno extends JPanel implements MouseListener {
 		Color barvaSvetel = new Color(255, 255, 179); // custom svetla barva
 		Color barvaTemen = new Color(0, 0, 38); // custom temna barva
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
-		super.paintComponent(g);
 		//-- Izris mreže.
 		for (int r=1; r<ROWS; r++) {        //vodoravne crte
 			g2.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
@@ -41,26 +40,30 @@ class Platno extends JPanel implements MouseListener {
 		}
      
 		//-- Nariše odigrane poteze na ploščo.
-		for (int r=0; r<ROWS; r++) {
-			for (int c=0; c<COLS; c++) {
-				int x = c * CELL_SIZE;
-				int y = r * CELL_SIZE;
-				Polje polje = Vodja.igra.plosca[r][c];
-				if (polje != Polje.PRAZNO) {
-					if(polje == Polje.X) g.setColor(barvaTemen);
-					else g.setColor(barvaSvetel);
-					g2.fillOval(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
+		if (Vodja.igra != null) {
+			for (int r=0; r<ROWS; r++) {
+				for (int c=0; c<COLS; c++) {
+					int x = c * CELL_SIZE;
+					int y = r * CELL_SIZE;
+					Polje polje = Vodja.igra.plosca[r][c];
+					if (polje != Polje.PRAZNO) {
+						if(polje == Polje.X) g.setColor(barvaTemen);
+						else g.setColor(barvaSvetel);
+						g2.fillOval(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
+					}
 				}
 			}
 		}
 	}
  
 	//======================================== listener mousePressed
+	@Override
 	public void mousePressed(MouseEvent e) {
 		//--- map x,y coordinates into a row and col.
 		int col = e.getX()/CELL_SIZE;
 		int row = e.getY()/CELL_SIZE;
-		Vodja.igrajClovekovoPotezo (new Koordinati(col, row));
+		
+		if (Vodja.igra != null) Vodja.igrajClovekovoPotezo (new Koordinati(col, row));
 		
      
 	}

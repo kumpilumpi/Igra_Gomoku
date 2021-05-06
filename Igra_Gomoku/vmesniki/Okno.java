@@ -106,10 +106,13 @@ public class Okno extends JFrame implements ActionListener {
 		}
 		
 		else if (e.getSource() == potezaRazveljavi) {
- 			if(Vodja.igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
- 			Vodja.igra.razveljaviPotezo();
- 			if (Vodja.igra.stanje.equals(Stanje.V_TEKU)) osvezi();
- 			else Toolkit.getDefaultToolkit().beep();
+			if (Vodja.igra != null) {	
+				if(Vodja.igra.odigranePoteze.isEmpty()) Toolkit.getDefaultToolkit().beep();
+	 			else if (Vodja.igra.stanje.equals(Stanje.V_TEKU)) {
+	 				Vodja.igra.razveljaviPotezo();
+	 				osvezi();}
+			}
+ 			Toolkit.getDefaultToolkit().beep();
 		}
 	}
 	
@@ -120,8 +123,9 @@ public class Okno extends JFrame implements ActionListener {
 		else {
 			switch(Vodja.igra.stanje) {
 			case NEODLOCENO: status.setText("Neodločeno!"); break;
-			case V_TEKU: 
-				status.setText("Na potezi je " + Vodja.igra.naPotezi + 
+			case V_TEKU:
+				String barva = Vodja.igra.naPotezi.equals(Igralec.O) ? "Beli" : "Črni";	
+				status.setText("Na potezi je " + barva + 
 						" - " + Vodja.vrstaIgralca.get(Vodja.igra.naPotezi)); 
 				break;
 			case ZMAGA_O: 
