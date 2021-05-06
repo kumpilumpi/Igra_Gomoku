@@ -63,7 +63,7 @@ class Platno extends JPanel implements MouseListener {
 		int col = e.getX()/CELL_SIZE;
 		int row = e.getY()/CELL_SIZE;
 		
-		if (Vodja.igra != null) Vodja.igrajClovekovoPotezo (new Koordinati(col, row));
+		if (Vodja.igra != null && Vodja.clovekNaVrsti==true) Vodja.igrajClovekovoPotezo (new Koordinati(col, row));
 		
      
 	}
