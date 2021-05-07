@@ -2,7 +2,6 @@ package vodja;
 
 import java.util.Map;
 import javax.swing.SwingWorker;
-import java.util.concurrent.TimeUnit;
 import vmesniki.Okno;
 import inteligenca.Inteligenca;
 import inteligenca.Nakljucna;
@@ -62,7 +61,7 @@ public class Vodja {
 			@Override
 			protected Koordinati doInBackground() {
 				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
-				try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
+				//try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
 				return poteza;
 			}
 			@Override

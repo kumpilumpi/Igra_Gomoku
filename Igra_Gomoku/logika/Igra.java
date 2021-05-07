@@ -17,6 +17,8 @@ public class Igra {
 	
 	public LinkedList<Koordinati> odigranePoteze;
 	
+	public LinkedList<Koordinati> moznePoteze;
+	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
 		 *  in za preverjanje kdaj bo konec igre
@@ -34,15 +36,22 @@ public class Igra {
 		velikost = n;	
 		this.stanje = Stanje.V_TEKU;
 		odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
+		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
+		
+		for ( int x = 0; x < velikost; x++ ) {     //napolni mozne
+			for ( int y = 0; y < velikost; y++ ) {
+				moznePoteze.add(new Koordinati(x,y));
+			}
+		}
+		
+		plosca = new Polje[velikost][velikost];
 				
-				plosca = new Polje[velikost][velikost];
-				
-				for (int i = 0; i < velikost; i++) {
-					for (int j = 0; j < velikost; j++) {
-						plosca[i][j] = Polje.PRAZNO;
-					}
+			for (int i = 0; i < velikost; i++) {
+				for (int j = 0; j < velikost; j++) {
+					plosca[i][j] = Polje.PRAZNO;
 				}
-				naPotezi = Igralec.O;
+			}
+		naPotezi = Igralec.O;
 	}
 
 	// ================ Komentarji =========================
@@ -238,30 +247,11 @@ public class Igra {
 			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();
 			odigranePoteze.add(poteza); // doda odigrano potezo na seznam vseh odigranih potez
+			moznePoteze.remove(poteza); // odstrani odigrano potezo s seznama vseh moznih potez
 			stanje();
 			return true;
 		}
 		else return false;
-	}
-	
-	
-
-	
-	public LinkedList<Koordinati> moznePoteze() {
-		/**
-		 * Vrne vse mozne poteze kot seznam koordinat
-		 */
-		
-		LinkedList<Koordinati> mozne = new LinkedList<Koordinati>();
-		
-		for ( int x = 0; x < velikost; x++ ) {
-			for ( int y = 0; y < velikost; y++ ) {
-				if (plosca[x][y].equals(Polje.PRAZNO)) {
-					mozne.add(new Koordinati(x,y));
-				}
-			}
-		}
-		return mozne;
 	}
 	
 	public void razveljaviPotezo() {
