@@ -1,6 +1,8 @@
 package logika;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 import splosno.Koordinati;
 
@@ -16,6 +18,8 @@ public class Igra {
 	public Stanje stanje;
 	
 	public LinkedList<Koordinati> odigranePoteze;
+	
+	public Set<Koordinati> kanditatiPoteze = new HashSet<Koordinati>(); // Kandidati za inteligenco
 	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
@@ -75,71 +79,7 @@ public class Igra {
 	
 	public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // pomozna funkcija, če je negativni int vrne 0, drugače int
 	
-	public boolean pomozna (int v0, int s0, int dv, int ds, Polje primerjava) {
-	/**
-	 * v0 - začetna vrstica / s0 - zacetni stolpec / dv - sprememba vrstica / ds sprememba stolpca / kdo - za kogar preverja ali je pet v vrsto
-	 * Preveri če se od danega indeksa v devetih korakih v dani smeri pojavi 5 v vrsto
-	 */
-		
-		int zaporedni = 0; //steje kolikokrat se zaporedoma pojavi iskano polje
-		
-		for( int i = 0; i < 9; i++ ) {
-			
-			try {
-				if(plosca[v0 + i*dv][s0 + i*ds].equals(primerjava)) {
-					++zaporedni;
-				}else{
-					if(zaporedni > 4) {
-						return true;
-					}else{
-						zaporedni = 0;
-					}
-				}
-			}catch(IndexOutOfBoundsException e){
-				continue;
-			}
-		}
-		return (zaporedni > 4) ? true : false;
-	}
-		
-	
-	public boolean petVrsta() {
-		/**
-		 * Preveri, če je zadnja odigrana poteza postavila pet v vrsto
-		 */
-		
-		Koordinati poteza = odigranePoteze.getLast();
-		
-		int v0 = poteza.getY();
-		int s0 = poteza.getX();
-		Polje primerjava = plosca[poteza.getY()][poteza.getX()];
-		
-		//stolpec : zacetek (-4,0) sprememba (1,0)
-		if (pomozna(v0 - 4, s0, 1, 0, primerjava)) { 	// Kordinati.Y -> Vrstica
-			//System.out.print(false);
-			return true;			
-		}
-		//vrstica : zacetek (0,-4) spermemba (0,1)
-		if (pomozna(v0, s0 -4, 0, 1, primerjava)) {
-			return true;			
-		}
-		//leva diagonala : zacetek (-4,-4) sprememba (1,1)
-		if (pomozna(v0 - 4, s0 - 4, 1, 1, primerjava)) {
-			return true;			
-		}
-		//desna diagonala : zecetek (-4,4) sprememba (1,-1)
-		if (pomozna(v0 - 4, s0 + 4, 1, -1, primerjava)) {
-			return true;			
-		}
-		else {
-			return false;
-		}		
-	}
-	
-	//========================= Mogoče malo hitrejše iskanje pet v vrsto
-	//zgleda da deluje
-	
-	public boolean pomozna2 (int v0, int s0, int dv, int ds) {
+	public boolean pomozna (int v0, int s0, int dv, int ds) {
 		
 		Polje primerjava = plosca[v0][s0];
 		int zaporedni = 1;
@@ -166,7 +106,7 @@ public class Igra {
 		return (zaporedni < 5) ? false : true;	
 	}
 	
-	public boolean petVrsta2() {
+	public boolean petVrsta() {
 		Koordinati poteza = odigranePoteze.getLast();
 		int v0 = poteza.getY();
 		int s0 = poteza.getX();
@@ -174,7 +114,7 @@ public class Igra {
 		int[][] smeri = new int[][] {{1,0},{0,1},{1,1},{1,-1}};
 		
 		for (int[] smer : smeri) {
-			if (pomozna2(v0, s0, smer[0], smer[1])) {
+			if (pomozna(v0, s0, smer[0], smer[1])) {
 				return true;
 			}
 		}
@@ -182,14 +122,14 @@ public class Igra {
 		return false;
 	}
 
-//========
+    //========
 	
 	public void stanje() { 
 	/**
 	 * posodobi igra.stanje -> ZMAGA_X, ZMAGA_O, NEODLOCENO
 	 */
 		
-		if(petVrsta2()) {
+		if(petVrsta()) {
 			Koordinati poteza = odigranePoteze.getLast();
 			Polje primerjava = plosca[poteza.getY()][poteza.getX()];
 			
@@ -226,7 +166,6 @@ public class Igra {
 		return (naPotezi.equals(Igralec.O)) ? Polje.O : Polje.X;
 	}
 	
-	
 	public boolean poteza(Koordinati poteza) { 
 		/**
 		 * javno metodo boolean odigraj(Koordinati koordinati), 
@@ -243,9 +182,20 @@ public class Igra {
 		}
 		else return false;
 	}
+		
+	public void razveljaviPotezo() {
+		// meotda predlagana na spletni pod opisom projekta
+		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
+		if(!odigranePoteze.isEmpty() && stanje.equals(Stanje.V_TEKU)) {
+			Koordinati poteza = odigranePoteze.getLast();
+			odigranePoteze.removeLast();		
+			plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
+			naslednji();
+		}
+		return;
+	}
 	
-	
-
+	// ======================== funkcije uporabljene v Inteligenci
 	
 	public LinkedList<Koordinati> moznePoteze() {
 		/**
@@ -263,16 +213,14 @@ public class Igra {
 		}
 		return mozne;
 	}
-	
-	public void razveljaviPotezo() {
-		// meotda predlagana na spletni pod opisom projekta
-		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
-		if(!odigranePoteze.isEmpty() && stanje.equals(Stanje.V_TEKU)) {
-			Koordinati poteza = odigranePoteze.getLast();
-			odigranePoteze.removeLast();		
-			plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
-			naslednji();
-		}
-		return;
+
+	public Set<Koordinati> kandidatiPoteze(){
+		
+		// Za zacetek bi za kandidate vzeli le vsa polja, ki imajo sosede
+		
+		
+		return kanditatiPoteze;
+		
 	}
+	
 }
