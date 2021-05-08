@@ -174,7 +174,7 @@ public class Igra {
 		
 		return (zaporedni < 5) ? false : true;	
 	}
-	
+	//this is a change
 	public boolean petVrsta2() {
 		Koordinati poteza = odigranePoteze.getLast();
 		int v0 = poteza.getY();
