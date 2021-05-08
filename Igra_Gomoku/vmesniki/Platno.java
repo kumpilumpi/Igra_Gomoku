@@ -11,20 +11,25 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 //preuredil strukturo programa po profesorjevem zgledu
 class Platno extends JPanel implements MouseListener {
+	
+	
 	public Platno() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		Color barvaPlosce = new Color(191, 128, 255); // custom barva
 		this.setBackground(barvaPlosce);
 		this.addMouseListener(this); // Listen own mouse events.
 	}
+	
+	
 	public static Okno okno;
-	private static final int ROWS = 15;
-	private static final int COLS = 15;
+	private static final int ROWS = Igra.velikost; // da lahko v classu igra reguliramo velikost mreže
+	private static final int COLS = Igra.velikost;
 	private static final int CELL_SIZE = 30; // Pixels
 	private static final int WIDTH  = COLS * CELL_SIZE;
 	private static final int HEIGHT = ROWS * CELL_SIZE;	
  
 	//============================================== paintComponent
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g; //graphics 2d 

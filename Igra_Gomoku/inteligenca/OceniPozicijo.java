@@ -23,7 +23,8 @@ public class OceniPozicijo {
 	 *  	- a je dovolj, da pogledamo samo koliko novih parov pride iz zadnje poteze
 	 */
 	
-	public static int oceniPotezo(Igra igra, Igralec igralec) {
+	
+	public static int oceniPozicijo(Igra igra, Igralec igralec) {
 		
 		int pariO = 0;
 		int pariX = 0;
@@ -37,6 +38,7 @@ public class OceniPozicijo {
 				}
 			}
 		}
+		System.out.println(pariO);
 		return (igralec == Igralec.O) ? (pariO - pariX) : (pariX - pariO);
 	}
 	

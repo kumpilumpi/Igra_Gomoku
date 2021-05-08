@@ -9,7 +9,7 @@ import splosno.Koordinati;
 public class Igra {
 	
 	// VELIKOST igralne plošče
-	public static int velikost;
+	public static int velikost = 7; // tukaj se nastavi velikost igre
 	
 	public Polje[][] plosca;  //igralno polje
 	
@@ -28,10 +28,10 @@ public class Igra {
 		 */
 		 
 	
-	// Konstruktorja ========================================= 
+	// Konstruktorji ========================================= 
 	
 	public Igra() {
-		this(15);
+		this(velikost);
 	}
 	
 	public Igra(int n) {
@@ -49,6 +49,19 @@ public class Igra {
 				naPotezi = Igralec.O;
 	}
 
+	// ustvari kopijo igre
+	
+	public Igra(Igra igra) {
+		this.plosca = new Polje[Igra.velikost][Igra.velikost];
+		for (int i = 0; i < Igra.velikost; i++) {
+			for (int j = 0; j < Igra.velikost; j++) {
+				this.plosca[i][j] = igra.plosca[i][j];
+			}
+		}
+		this.naPotezi = igra.naPotezi;
+	}
+	
+	
 	// ================ Komentarji =========================
 	
 	/**
@@ -154,6 +167,7 @@ public class Igra {
 	
 	public boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
+//		if (poteza == null) return false;
 		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
 		}
@@ -166,13 +180,13 @@ public class Igra {
 		return (naPotezi.equals(Igralec.O)) ? Polje.O : Polje.X;
 	}
 	
-	public boolean poteza(Koordinati poteza) { 
+	public boolean poteza(Koordinati poteza) { // a sploh rabi bit boolean ali void?
 		/**
 		 * javno metodo boolean odigraj(Koordinati koordinati), 
 		 * ki odigra potezo razreda Koordinati, če je možna. 
 		 * Metoda vrne true, če je poteza možna, sicer pa false.alca
 		 */
-		
+		if(poteza==null) return false;
 		if(jeLegalna(poteza)) {
 			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();

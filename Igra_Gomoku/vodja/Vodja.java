@@ -5,6 +5,7 @@ import javax.swing.SwingWorker;
 import java.util.concurrent.TimeUnit;
 import vmesniki.Okno;
 import inteligenca.Inteligenca;
+import inteligenca.Minimax;
 import inteligenca.Nakljucna;
 import logika.Igra;
 import logika.Igralec;
@@ -33,7 +34,7 @@ public class Vodja {
 	}
 	
 	public static void igramo () {
-		okno.osvezi(); // <- ??
+		okno.osvezi(); 
 		switch (igra.stanje) {
 		case ZMAGA_O:
 		case ZMAGA_X: 
@@ -53,15 +54,21 @@ public class Vodja {
 		}
 	}
 
+	//Različne inteligence
 	
-	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("hej") ;//new Minimax(3); // <-String z imenom
+	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Hej") ;// <-String z imenom
+	
+	public static Inteligenca miniMax = new Minimax(1);
+	
+	
+	// 
 	
 	public static void igrajRacunalnikovoPotezo() {
 		Igra zacetkaIgra = igra;
 		SwingWorker<Koordinati, Void> worker = new SwingWorker<Koordinati, Void> () {
 			@Override
 			protected Koordinati doInBackground() {
-				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
+				Koordinati poteza = miniMax.izberiPotezo(igra);
 				try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
 				return poteza;
 			}
@@ -70,6 +77,7 @@ public class Vodja {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetkaIgra) {
+					if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null
 					igra.poteza(poteza);
 					igramo ();
 				}
