@@ -19,6 +19,8 @@ public class Igra {
 	
 	public LinkedList<Koordinati> moznePoteze;
 	
+	public LinkedList<Koordinati> zmagovalnaVrsta;
+	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
 		 *  in za preverjanje kdaj bo konec igre
@@ -36,7 +38,8 @@ public class Igra {
 		velikost = n;	
 		this.stanje = Stanje.V_TEKU;
 		odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
-		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
+		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam	
+		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
 		for ( int x = 0; x < velikost; x++ ) {     //napolni mozne
 			for ( int y = 0; y < velikost; y++ ) {
@@ -150,14 +153,14 @@ public class Igra {
 	
 	public boolean pomozna2 (int v0, int s0, int dv, int ds) {
 		
+		zmagovalnaVrsta.clear();
+		zmagovalnaVrsta.add(new Koordinati(s0,v0));
 		Polje primerjava = plosca[v0][s0];
 		int zaporedni = 1;
-		
 		
 		int[] smeri = new int[] {1,-1};
 		
 		for (int smer : smeri) { //preveri naprej in nazaj
-			
 			int i = 1;
 			dv = dv * smer;
 			ds = ds * smer;
@@ -165,13 +168,13 @@ public class Igra {
 				while((zaporedni < 5) && (plosca[v0 + i*dv][s0 + i*ds].equals(primerjava))) {
 				i++;
 				zaporedni++;
+				zmagovalnaVrsta.add(new Koordinati(s0 + i*ds-ds, v0 + i*dv-dv) );
 				}
 			}catch (IndexOutOfBoundsException e) {
 				continue;
 			}
 			
 		}
-		
 		return (zaporedni < 5) ? false : true;	
 	}
 	//this is a change
@@ -201,8 +204,7 @@ public class Igra {
 		if(petVrsta2()) {
 			Koordinati poteza = odigranePoteze.getLast();
 			Polje primerjava = plosca[poteza.getY()][poteza.getX()];
-			
-			stanje = (primerjava.equals(Polje.O)) ? Stanje.ZMAGA_O : Stanje.ZMAGA_X ;
+			stanje = (primerjava.equals(Polje.O)) ? Stanje.ZMAGA_O : Stanje.ZMAGA_X ;			
 		}
 		if (odigranePoteze.size() == velikost * velikost) {
 			stanje = Stanje.NEODLOCENO;

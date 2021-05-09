@@ -30,7 +30,9 @@ class Platno extends JPanel implements MouseListener {
 		Graphics2D g2 = (Graphics2D) g; //graphics 2d 
 		Color barvaSvetel = new Color(255, 255, 179); // custom svetla barva
 		Color barvaTemen = new Color(0, 0, 38); // custom temna barva
+		Color barvaZmaga = new Color(255, 160, 128);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
+				
 		//-- Izris mreže.
 		for (int r=1; r<ROWS; r++) {        //vodoravne crte
 			g2.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
@@ -38,7 +40,17 @@ class Platno extends JPanel implements MouseListener {
 		for (int c=1; c<COLS; c++) {
 			g2.drawLine(c*CELL_SIZE, 0, c*CELL_SIZE, HEIGHT);
 		}
-     
+		
+		//zmagovalna vrsta se obarva
+		if(Vodja.igra != null && (Vodja.igra.stanje.equals(Stanje.ZMAGA_O)||Vodja.igra.stanje.equals(Stanje.ZMAGA_X))) {
+			for (Koordinati polje : Vodja.igra.zmagovalnaVrsta) {
+				int i = polje.getX();
+				int j = polje.getY();
+				g2.setColor(barvaZmaga);
+				g2.fillRect((int)(CELL_SIZE * i+1), (int)(CELL_SIZE * j+1), (int)CELL_SIZE-1, (int)CELL_SIZE-1);
+			}
+		}
+		
 		//-- Nariše odigrane poteze na ploščo.
 		if (Vodja.igra != null) {
 			for (int r=0; r<ROWS; r++) {
@@ -53,7 +65,7 @@ class Platno extends JPanel implements MouseListener {
 					}
 				}
 			}
-		}
+		}		
 	}
  
 	//======================================== listener mousePressed
