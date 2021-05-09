@@ -58,7 +58,7 @@ public class Vodja {
 	
 	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Hej") ;// <-String z imenom
 	
-	public static Inteligenca miniMax = new Minimax(1);
+	public static Inteligenca racunalnikovaInteligenca2 = new Minimax(2);
 	
 	
 	// 
@@ -68,7 +68,7 @@ public class Vodja {
 		SwingWorker<Koordinati, Void> worker = new SwingWorker<Koordinati, Void> () {
 			@Override
 			protected Koordinati doInBackground() {
-				Koordinati poteza = miniMax.izberiPotezo(igra);
+				Koordinati poteza = racunalnikovaInteligenca2.izberiPotezo(igra);
 				try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
 				return poteza;
 			}
@@ -77,7 +77,9 @@ public class Vodja {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetkaIgra) {
-					if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null
+					
+					if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null <-PREVERJANJE
+					
 					igra.poteza(poteza);
 					igramo ();
 				}

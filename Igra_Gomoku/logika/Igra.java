@@ -18,6 +18,8 @@ public class Igra {
 	public Stanje stanje;
 	
 	public LinkedList<Koordinati> odigranePoteze;
+
+	public LinkedList<Koordinati> moznePoteze;
 	
 	public Set<Koordinati> kanditatiPoteze = new HashSet<Koordinati>(); // Kandidati za inteligenco
 	
@@ -38,6 +40,14 @@ public class Igra {
 		velikost = n;	
 		this.stanje = Stanje.V_TEKU;
 		odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
+		
+		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam // prekopirano main
+		
+		for ( int x = 0; x < velikost; x++ ) {     //napolni mozne
+			for ( int y = 0; y < velikost; y++ ) {
+				moznePoteze.add(new Koordinati(x,y));
+			}
+		}
 				
 				plosca = new Polje[velikost][velikost];
 				
@@ -167,7 +177,9 @@ public class Igra {
 	
 	public boolean jeLegalna(Koordinati poteza) {
 		// preveri če je poteza legalna
-//		if (poteza == null) return false;
+		
+		if (poteza == null) return false; // <-DODANO
+		
 		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && poteza.getX() < 15 && poteza.getY() < 15) {
 			return true;
 		}
@@ -186,11 +198,12 @@ public class Igra {
 		 * ki odigra potezo razreda Koordinati, če je možna. 
 		 * Metoda vrne true, če je poteza možna, sicer pa false.alca
 		 */
-		if(poteza==null) return false;
+		
 		if(jeLegalna(poteza)) {
 			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();
 			odigranePoteze.add(poteza); // doda odigrano potezo na seznam vseh odigranih potez
+			moznePoteze.remove(poteza); // dodano iz maina
 			stanje();
 			return true;
 		}
@@ -202,7 +215,7 @@ public class Igra {
 		// kortistna bo ko bomo začeli delati na računalniškem vmesniku
 		if(!odigranePoteze.isEmpty() && stanje.equals(Stanje.V_TEKU)) {
 			Koordinati poteza = odigranePoteze.getLast();
-			odigranePoteze.removeLast();		
+			odigranePoteze.removeLast();	
 			plosca[poteza.getY()][poteza.getX()] = Polje.PRAZNO;
 			naslednji();
 		}
@@ -210,23 +223,6 @@ public class Igra {
 	}
 	
 	// ======================== funkcije uporabljene v Inteligenci
-	
-	public LinkedList<Koordinati> moznePoteze() {
-		/**
-		 * Vrne vse mozne poteze kot seznam koordinat
-		 */
-		
-		LinkedList<Koordinati> mozne = new LinkedList<Koordinati>();
-		
-		for ( int x = 0; x < velikost; x++ ) {
-			for ( int y = 0; y < velikost; y++ ) {
-				if (plosca[x][y].equals(Polje.PRAZNO)) {
-					mozne.add(new Koordinati(x,y));
-				}
-			}
-		}
-		return mozne;
-	}
 
 	public Set<Koordinati> kandidatiPoteze(){
 		

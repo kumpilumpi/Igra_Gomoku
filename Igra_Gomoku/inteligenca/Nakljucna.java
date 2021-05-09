@@ -16,7 +16,7 @@ public class Nakljucna extends Inteligenca {
 	@Override
 	public Koordinati izberiPotezo(Igra igra) {
 		Random rand = new Random();
-		LinkedList<Koordinati> mozne = igra.moznePoteze();
+		LinkedList<Koordinati> mozne = igra.moznePoteze;
 		int random = rand.nextInt(mozne.size());
 		
 		return mozne.get(random);

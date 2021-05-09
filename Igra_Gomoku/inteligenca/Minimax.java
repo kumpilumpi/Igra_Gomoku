@@ -31,9 +31,11 @@ public class Minimax extends Inteligenca {
 	// vrne najboljso ocenjeno potezo z vidike igralca jaz
 	public OcenjenaPoteza minimax(Igra igra, int globina, Igralec jaz) {
 		OcenjenaPoteza najboljsaPoteza = null;
-		List<Koordinati> moznePoteze = igra.moznePoteze();
+		List<Koordinati> moznePoteze = igra.moznePoteze;
 		for (Koordinati p: moznePoteze) {
-			System.out.println(p);
+			
+			System.out.println(p); // <- PREVERJANJE
+			
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.poteza(p);
 			int ocena;
