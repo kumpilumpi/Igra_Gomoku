@@ -25,16 +25,24 @@ public class Minimax extends Inteligenca {
 	@Override
 	public Koordinati izberiPotezo (Igra igra) {
 		OcenjenaPoteza najboljsaPoteza = minimax(igra, this.globina, igra.naPotezi);
+		
+
+// <- PREVERJANJE
+//		System.out.println(najboljsaPoteza.poteza);
+//		System.out.println("Testna vrstica");
+//		System.out.println(najboljsaPoteza.ocena);
+//		
+		
 		return najboljsaPoteza.poteza;	
 	}
 	
-	// vrne najboljso ocenjeno potezo z vidike igralca jaz
+	// vrne najboljso ocenjeno potezo z vidika igralca jaz
 	public OcenjenaPoteza minimax(Igra igra, int globina, Igralec jaz) {
 		OcenjenaPoteza najboljsaPoteza = null;
 		List<Koordinati> moznePoteze = igra.moznePoteze;
 		for (Koordinati p: moznePoteze) {
 			
-			System.out.println(p); // <- PREVERJANJE
+			//System.out.println(p); // <- PREVERJANJE
 			
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.poteza(p);

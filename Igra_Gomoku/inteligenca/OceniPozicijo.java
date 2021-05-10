@@ -38,7 +38,9 @@ public class OceniPozicijo {
 				}
 			}
 		}
-		System.out.println(pariO);
+		
+		//System.out.println(pariO);
+		
 		return (igralec == Igralec.O) ? (pariO - pariX) : (pariX - pariO);
 	}
 	

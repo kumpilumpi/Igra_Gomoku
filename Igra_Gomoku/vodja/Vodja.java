@@ -48,7 +48,7 @@ public class Vodja {
 				clovekNaVrsti = true;
 				break;
 			case R:
-				igrajRacunalnikovoPotezo ();
+				igrajRacunalnikovoPotezo();
 				break;
 			}
 		}
@@ -64,21 +64,32 @@ public class Vodja {
 	// 
 	
 	public static void igrajRacunalnikovoPotezo() {
-		Igra zacetkaIgra = igra;
+		Igra zacetnaIgra = igra;
+		
 		SwingWorker<Koordinati, Void> worker = new SwingWorker<Koordinati, Void> () {
+			
 			@Override
 			protected Koordinati doInBackground() {
-				Koordinati poteza = racunalnikovaInteligenca2.izberiPotezo(igra);
-				try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
+				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
+ //  			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
+				
+// <- PREVERJANJE				
+				//System.out.println("2 Napaka" + poteza); 
+				
 				return poteza;
 			}
+			
 			@Override
 			protected void done () {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
-				if (igra == zacetkaIgra) {
+				if (igra == zacetnaIgra) {
 					
+// <- PREVERJANJE
 					if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null <-PREVERJANJE
+					
+					// hoče izvršit potezo null, jo ne izvrši in še enkrat kliče računlnikovoInteligenco, ker se ni zamenjala naPotezi,
+					// ustvari se zanka.
 					
 					igra.poteza(poteza);
 					igramo ();

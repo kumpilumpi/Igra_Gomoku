@@ -10,6 +10,9 @@ import java.util.EnumMap;
 
 import javax.swing.*;
 
+import inteligenca.Inteligenca;
+import inteligenca.Minimax;
+import inteligenca.OceniPozicijo;
 import vodja.Vodja;
 import vodja.VrstaIgralca;
 import logika.Igralec;
@@ -33,6 +36,11 @@ public class Okno extends JFrame implements ActionListener {
 	private JMenuItem igraClovekClovek;
 	private JMenuItem igraRacunalnikRacunalnik;
 	private JMenuItem potezaRazveljavi;
+	
+	
+	private JButton ocena;
+	public static Inteligenca minimax = new Minimax(1);
+	
 
 	/**
 	 * Ustvari novo glavno okno in prični igrati igro.
@@ -70,6 +78,10 @@ public class Okno extends JFrame implements ActionListener {
 		potezaRazveljavi = new JMenuItem("Razveljavi");
 		poteza_menu.add(potezaRazveljavi);
 		potezaRazveljavi.addActionListener(this);
+		
+		ocena = new JButton("Ocena");
+		menu_bar.add(ocena);
+		ocena.addActionListener(this);
 		
 		// igralno  polje
 		platno = new Platno();
@@ -109,6 +121,22 @@ public class Okno extends JFrame implements ActionListener {
 			}
  			Toolkit.getDefaultToolkit().beep();
 		}
+		
+		//PREVERJANJE
+		
+		else if (e.getSource() == ocena) {
+//			minimax.izberiPotezo(Vodja.igra);
+			
+			
+			System.out.println(minimax.izberiPotezo(Vodja.igra));
+			
+			//int ocena = OceniPozicijo.oceniPozicijo(Vodja.igra, Vodja.igra.naPotezi);
+
+			//System.out.println(ocena);
+		}
+		
+		//
+		
 		else if (e.getSource() == igraClovekClovek) {
 			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
 			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.C); 

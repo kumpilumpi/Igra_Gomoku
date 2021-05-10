@@ -62,13 +62,23 @@ public class Igra {
 	// ustvari kopijo igre
 	
 	public Igra(Igra igra) {
+		this.moznePoteze = new LinkedList<Koordinati>();
 		this.plosca = new Polje[Igra.velikost][Igra.velikost];
 		for (int i = 0; i < Igra.velikost; i++) {
 			for (int j = 0; j < Igra.velikost; j++) {
+				// dodano 
+				if(igra.plosca[i][j] == Polje.PRAZNO) this.moznePoteze.add(new Koordinati(i,j)); //??
 				this.plosca[i][j] = igra.plosca[i][j];
 			}
 		}
 		this.naPotezi = igra.naPotezi;
+		
+		//popravljeno
+		
+//		this.moznePoteze = igra.moznePoteze; -> moramo drugače incilizirat ker se med zanko drugače spremeni in javi napako
+		
+		this.odigranePoteze = igra.odigranePoteze;
+		this.stanje = igra.stanje;
 	}
 	
 	
@@ -222,7 +232,7 @@ public class Igra {
 		return;
 	}
 	
-	// ======================== funkcije uporabljene v Inteligenci
+// ======================== funkcije uporabljene v Inteligenci
 
 	public Set<Koordinati> kandidatiPoteze(){
 		

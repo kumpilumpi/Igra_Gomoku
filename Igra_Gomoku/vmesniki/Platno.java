@@ -3,7 +3,6 @@ package vmesniki;
 import logika.*;
 import splosno.Koordinati;
 import vodja.Vodja;
-import vmesniki.Okno;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -23,7 +22,7 @@ class Platno extends JPanel implements MouseListener {
 	
 	public static Okno okno;
 	private static final int ROWS = Igra.velikost; // da lahko v classu igra reguliramo velikost mreže
-	private static final int COLS = Igra.velikost;
+	private static final int COLS = ROWS;
 	private static final int CELL_SIZE = 30; // Pixels
 	private static final int WIDTH  = COLS * CELL_SIZE;
 	private static final int HEIGHT = ROWS * CELL_SIZE;	

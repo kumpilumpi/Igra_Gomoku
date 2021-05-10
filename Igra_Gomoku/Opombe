@@ -28,6 +28,10 @@ INTELIGENCA
 
 
 
+- Opombe pri združevanju kode:
+	- platno: ROWS/COLS naj bosta nastavljena na igra.velikost
+	- logika/igra: Konstruktor za kopiranje ne nastavi vseh spremenljivk
+
 
 
 
