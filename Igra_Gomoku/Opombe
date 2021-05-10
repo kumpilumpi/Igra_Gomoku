@@ -16,12 +16,17 @@ s
 INTELIGENCA
 	- ocenjevanje mreze -> prva verzija samo prešteje vse pare
 								- neučinkovita, slaba ocena
+			- definiramo shranimo si vse linije, kjer je lahko 5 v vrsto(vsi stolpci, vrstice, primerne diagonale;
+								
+								
+								
+								
 	
 	- Delam na miniMax. 
 	- Treba dodati metodo za izluščenje kanditativ za primerne poteze.
 		-delam na temu
 
--Težave minmax ne deluje, kljub temu da koda prekopirana od profesorja nekako poskuša izvršiti potezo null
+
 
 
 

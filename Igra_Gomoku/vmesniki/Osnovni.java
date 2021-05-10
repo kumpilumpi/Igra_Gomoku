@@ -50,6 +50,10 @@ public class Osnovni {
 			else if (igra.stanje == Stanje.NEODLOCENO) {
 				System.out.print("Neodločen izid!");
 			}
+			for (Koordinati poteza : igra.kanditatiPoteze) {
+				System.out.println(poteza);
+			}
+			
 			
 			
 		}
@@ -59,12 +63,12 @@ public class Osnovni {
 	//izpis igralne plošče v terminalu
     public static void printPlosca() {
 
-        for (int i = 0; i < 15; ++i) {
+        for (int i = 0; i < igra.velikost; ++i) {
             String out = "[";
 
          
             Polje[] row = igra.plosca[i];
-            for (int j = 0; j < 15; ++j) {
+            for (int j = 0; j < igra.velikost; ++j) {
                 Polje v = row[j];
                 
                 if (v.equals(Polje.O)){

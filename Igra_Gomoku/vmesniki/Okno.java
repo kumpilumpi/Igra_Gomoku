@@ -37,7 +37,7 @@ public class Okno extends JFrame implements ActionListener {
 	private JMenuItem igraRacunalnikRacunalnik;
 	private JMenuItem potezaRazveljavi;
 	
-	
+	//Preverjanje
 	private JButton ocena;
 	public static Inteligenca minimax = new Minimax(1);
 	

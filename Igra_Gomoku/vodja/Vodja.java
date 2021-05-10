@@ -56,9 +56,9 @@ public class Vodja {
 
 	//Različne inteligence
 	
-	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Hej") ;// <-String z imenom
+	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static Inteligenca racunalnikovaInteligenca2 = new Minimax(2);
+	public static Inteligenca racunalnikovaInteligenca2 = new Minimax(4);
 	
 	
 	// 
@@ -70,7 +70,7 @@ public class Vodja {
 			
 			@Override
 			protected Koordinati doInBackground() {
-				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
+				Koordinati poteza = racunalnikovaInteligenca2.izberiPotezo(igra);
  //  			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
 				
 // <- PREVERJANJE				
@@ -86,7 +86,7 @@ public class Vodja {
 				if (igra == zacetnaIgra) {
 					
 // <- PREVERJANJE
-					if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null <-PREVERJANJE
+					//if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null <-PREVERJANJE
 					
 					// hoče izvršit potezo null, jo ne izvrši in še enkrat kliče računlnikovoInteligenco, ker se ni zamenjala naPotezi,
 					// ustvari se zanka.

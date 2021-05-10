@@ -21,7 +21,7 @@ public class Igra {
 
 	public LinkedList<Koordinati> moznePoteze;
 	
-	public Set<Koordinati> kanditatiPoteze = new HashSet<Koordinati>(); // Kandidati za inteligenco
+	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
 	
 		/**
 		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
@@ -37,11 +37,14 @@ public class Igra {
 	}
 	
 	public Igra(int n) {
-		velikost = n;	
+		velikost = n;
 		this.stanje = Stanje.V_TEKU;
 		odigranePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam
 		
 		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam // prekopirano main
+		kanditatiPoteze = new HashSet<Koordinati>();
+		
+		kanditatiPoteze.add(new Koordinati(this.velikost/2, this.velikost/2)); // da je že iz prve vsaj en kandidat notr
 		
 		for ( int x = 0; x < velikost; x++ ) {     //napolni mozne
 			for ( int y = 0; y < velikost; y++ ) {
@@ -63,6 +66,7 @@ public class Igra {
 	
 	public Igra(Igra igra) {
 		this.moznePoteze = new LinkedList<Koordinati>();
+		
 		this.plosca = new Polje[Igra.velikost][Igra.velikost];
 		for (int i = 0; i < Igra.velikost; i++) {
 			for (int j = 0; j < Igra.velikost; j++) {
@@ -72,6 +76,12 @@ public class Igra {
 			}
 		}
 		this.naPotezi = igra.naPotezi;
+		
+		
+		this.kanditatiPoteze = new HashSet<Koordinati>();
+		for (Koordinati p : igra.kanditatiPoteze) {
+			this.kanditatiPoteze.add(p);
+		}
 		
 		//popravljeno
 		
@@ -213,6 +223,7 @@ public class Igra {
 			plosca[poteza.getY()][poteza.getX()] = naPoteziPolje(naPotezi); //zamenjal getX in getY
 			naslednji();
 			odigranePoteze.add(poteza); // doda odigrano potezo na seznam vseh odigranih potez
+			kandidatiPoteze(poteza);
 			moznePoteze.remove(poteza); // dodano iz maina
 			stanje();
 			return true;
@@ -234,13 +245,29 @@ public class Igra {
 	
 // ======================== funkcije uporabljene v Inteligenci
 
-	public Set<Koordinati> kandidatiPoteze(){
+	public void kandidatiPoteze(Koordinati zadnjaPoteza){
 		
-		// Za zacetek bi za kandidate vzeli le vsa polja, ki imajo sosede
+		// Vsa polja, ki niso dalj kot 2mesti od katerekoli ploščice
+		// Jih dodaja sproti -> vzame zadnjo pogleda okolico 2 v vsako smer, če je prazna doda
 		
+		int x0 = zadnjaPoteza.getX();
+		int y0 = zadnjaPoteza.getY();
 		
-		return kanditatiPoteze;
+		kanditatiPoteze.remove(zadnjaPoteza); // iz množice kandidatov odstrani zadnjo potezo
 		
+		for( int x = -2; x<3; x++ ) {
+			for (int y = -2; y < 3; y++) {
+				try {
+					if(plosca[y0-y][x0-x]== Polje.PRAZNO) {
+						kanditatiPoteze.add(new Koordinati(x0-x,y0-y));
+					}
+				}catch (IndexOutOfBoundsException e) {
+					continue;
+				}
+			}
+		}
 	}
+
+
 	
 }

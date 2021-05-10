@@ -39,8 +39,8 @@ public class Minimax extends Inteligenca {
 	// vrne najboljso ocenjeno potezo z vidika igralca jaz
 	public OcenjenaPoteza minimax(Igra igra, int globina, Igralec jaz) {
 		OcenjenaPoteza najboljsaPoteza = null;
-		List<Koordinati> moznePoteze = igra.moznePoteze;
-		for (Koordinati p: moznePoteze) {
+//		List<Koordinati> moznePoteze = igra.moznePoteze;
+		for (Koordinati p: igra.kanditatiPoteze) { // je bilo mozne poteze
 			
 			//System.out.println(p); // <- PREVERJANJE
 			
@@ -53,7 +53,7 @@ public class Minimax extends Inteligenca {
 			case NEODLOCENO: ocena = NEODLOC; break;
 			default:
 				// nekdo je na potezi
-				if (globina == 1) ocena = OceniPozicijo.oceniPozicijo(kopijaIgre, jaz);
+				if (globina == 1) ocena = OceniPozicijo.oceniPozicijo1(kopijaIgre, jaz);
 				// globina > 1
 				else ocena = minimax(kopijaIgre, globina-1, jaz).ocena;	
 			}
@@ -62,9 +62,9 @@ public class Minimax extends Inteligenca {
 					|| (jaz == igra.naPotezi && ocena > najboljsaPoteza.ocena)
 					// sicer min 
 					|| (jaz != igra.naPotezi && ocena < najboljsaPoteza.ocena))
-				najboljsaPoteza = new OcenjenaPoteza (p, ocena);		
+				najboljsaPoteza = new OcenjenaPoteza (p, ocena);
 		}
-		System.out.println(najboljsaPoteza);
+		
 		return najboljsaPoteza;
 	}
 	

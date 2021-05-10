@@ -24,7 +24,7 @@ public class OceniPozicijo {
 	 */
 	
 	
-	public static int oceniPozicijo(Igra igra, Igralec igralec) {
+	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
 		
 		int pariO = 0;
 		int pariX = 0;
@@ -69,5 +69,11 @@ public class OceniPozicijo {
 	
 // ===========================================================
 	
+	public static int oceniPozicijo2(Igra igra, Igralec igralec) {
+		
+		
+		return 0;
+		
+	}
 	
 }
