@@ -18,7 +18,7 @@ INTELIGENCA
 								- neučinkovita, slaba ocena
 			- definiramo shranimo si vse linije, kjer je lahko 5 v vrsto(vsi stolpci, vrstice, primerne diagonale;
 								
-								
+	- Igri dodoamo spremenljivko, ki je trenutna ocena igre (+x zmaguje -crni zmaguje)
 								
 								
 	

@@ -212,7 +212,7 @@ public class Igra {
 		return (naPotezi.equals(Igralec.O)) ? Polje.O : Polje.X;
 	}
 	
-	public boolean poteza(Koordinati poteza) { // a sploh rabi bit boolean ali void?
+	public boolean poteza(Koordinati poteza) { // more biti boolean in imenovana odigraj navodila;
 		/**
 		 * javno metodo boolean odigraj(Koordinati koordinati), 
 		 * ki odigra potezo razreda Koordinati, če je možna. 
