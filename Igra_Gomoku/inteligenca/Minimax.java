@@ -25,7 +25,7 @@ public class Minimax extends Inteligenca {
 	@Override
 	public Koordinati izberiPotezo (Igra igra) {
 		OcenjenaPoteza najboljsaPoteza = minimax(igra, this.globina, igra.naPotezi);		
-		return najboljsaPoteza.poteza;	
+		return najboljsaPoteza.poteza;
 	}
 	
 	
@@ -34,8 +34,6 @@ public class Minimax extends Inteligenca {
 		OcenjenaPoteza najboljsaPoteza = null;
 
 		for (Koordinati p: igra.kanditatiPoteze) { // je bilo mozne poteze
-			
-			//System.out.println(p); // <- PREVERJANJE
 			
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.poteza(p);

@@ -1,5 +1,6 @@
 package logika;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -9,7 +10,7 @@ import splosno.Koordinati;
 public class Igra {
 	
 	// VELIKOST igralne plošče
-	public static int velikost = 7; // tukaj se nastavi velikost igre
+	
 	
 	public Polje[][] plosca;  //igralno polje
 	
@@ -19,17 +20,60 @@ public class Igra {
 	
 	public LinkedList<Koordinati> odigranePoteze;
 
-	public LinkedList<Koordinati> moznePoteze;
+	public LinkedList<Koordinati> moznePoteze; //ne vem če sploh kaj rabva
 	
 	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
 	
-		/**
-		 *  mogoče probamo beležit poteze, lahko uporabimo za razveljavitev poteze
-		 *  in za preverjanje kdaj bo konec igre
-		 *  če shranjujemo poteze lahko preverjamo kje je pet v vrsto samo na zadnji potezi.
-		 */
-		 
+	//final static ==========================================
 	
+	public static int velikost = 7; // tukaj se nastavi velikost igre
+	public static final LinkedList<Linija> LINIJE =  new LinkedList<Linija>(); // vse linije (navpične (15), vodoravne(15), 2 x diagonalne (2x19))
+	
+	public static Linija pomozna_static(int x, int y, int[]smer) {
+		int[] xi = new int[Igra.velikost];
+		int[] yi = new int[Igra.velikost];
+		int indeks = 0;
+		
+		while(x >= 0 && x < Igra.velikost && y >= 0 && y < Igra.velikost) {
+			xi[indeks] = x;
+			yi[indeks] = y;
+			
+			x += smer[0];
+			y += smer[1];
+			indeks++;
+		}
+		
+		if(xi.length < 5) { // samo linije, z več kot 4 elementi doda
+			return null;
+		}
+		else {
+			return new Linija(xi,yi);
+		}
+	}
+		
+	static { // inicializacija LINIJE - se izvede le enkrat, ko prvic pozenemo program
+		
+		//NAPAKE
+		
+		for (int n = 0; n < Igra.velikost; n++) {
+			
+			LINIJE.add(pomozna_static(0, n, new int[] {1,0}));  	//navpicne linije 
+			LINIJE.add(pomozna_static(n, 0, new int[] {0,1}));  	//vodoravne
+			
+			LINIJE.add(pomozna_static(0, n, new int[] {1,1}));  	//desna diagonala zgornja vrstica
+			LINIJE.add(pomozna_static(0, n, new int[] {1,-1})); 	//leva diagonala zgornja vrstica
+			
+			if (n != 0) { //da se ena diagonala ne ponovi
+				LINIJE.add(pomozna_static(n, 0, new int[] {1,1}));  //desna diagonala prvi stolpec
+				LINIJE.add(pomozna_static(14, n, new int[] {-1,1}));//leva diagonala zadnji stolpec
+			}	
+			}
+		System.out.println(LINIJE);
+		System.out.println(LINIJE.size());
+			
+	}
+		
+
 	// Konstruktorji ========================================= 
 	
 	public Igra() {
@@ -44,7 +88,7 @@ public class Igra {
 		moznePoteze = new LinkedList<Koordinati>(); // usvtari prazen seznam // prekopirano main
 		kanditatiPoteze = new HashSet<Koordinati>();
 		
-		kanditatiPoteze.add(new Koordinati(this.velikost/2, this.velikost/2)); // da je že iz prve vsaj en kandidat notr
+		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // da je že iz prve vsaj en kandidat notr
 		
 		for ( int x = 0; x < velikost; x++ ) {     //napolni mozne
 			for ( int y = 0; y < velikost; y++ ) {
@@ -52,14 +96,14 @@ public class Igra {
 			}
 		}
 				
-				plosca = new Polje[velikost][velikost];
-				
-				for (int i = 0; i < velikost; i++) {
-					for (int j = 0; j < velikost; j++) {
-						plosca[i][j] = Polje.PRAZNO;
-					}
-				}
-				naPotezi = Igralec.O;
+		plosca = new Polje[velikost][velikost];
+		
+		for (int i = 0; i < velikost; i++) {
+			for (int j = 0; j < velikost; j++) {
+				plosca[i][j] = Polje.PRAZNO;
+			}
+		}
+		naPotezi = Igralec.O;
 	}
 
 	// ustvari kopijo igre

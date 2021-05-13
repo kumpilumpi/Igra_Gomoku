@@ -10,6 +10,7 @@ public class OceniPozicijo {
 	
 	
 // =================================prvaOcena -> zelo slaba časovno zahtevna
+	
 	/**
 	 * @param igra
 	 * @param igralec
@@ -38,7 +39,6 @@ public class OceniPozicijo {
 				}
 			}
 		}
-		
 		//System.out.println(pariO);
 		
 		return (igralec == Igralec.O) ? (pariO - pariX) : (pariX - pariO);

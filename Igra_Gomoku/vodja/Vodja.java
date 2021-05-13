@@ -71,11 +71,7 @@ public class Vodja {
 			@Override
 			protected Koordinati doInBackground() {
 				Koordinati poteza = racunalnikovaInteligenca2.izberiPotezo(igra);
- //  			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};
-				
-// <- PREVERJANJE				
-				//System.out.println("2 Napaka" + poteza); 
-				
+ //  			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};				
 				return poteza;
 			}
 			
@@ -84,12 +80,6 @@ public class Vodja {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetnaIgra) {
-					
-// <- PREVERJANJE
-					//if (poteza == null) System.out.println("Napaka"); // tukaj hoče izvršiti potezo null <-PREVERJANJE
-					
-					// hoče izvršit potezo null, jo ne izvrši in še enkrat kliče računlnikovoInteligenco, ker se ni zamenjala naPotezi,
-					// ustvari se zanka.
 					
 					igra.poteza(poteza);
 					igramo ();
