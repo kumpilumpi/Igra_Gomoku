@@ -130,9 +130,9 @@ public class Okno extends JFrame implements ActionListener {
 			
 			System.out.println(minimax.izberiPotezo(Vodja.igra));
 			
-			//int ocena = OceniPozicijo.oceniPozicijo(Vodja.igra, Vodja.igra.naPotezi);
+			int ocena = OceniPozicijo.oceniPozicijo1(Vodja.igra, Vodja.igra.naPotezi);
 
-			//System.out.println(ocena);
+			System.out.println(ocena);
 		}
 		
 		//

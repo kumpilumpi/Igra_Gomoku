@@ -63,12 +63,12 @@ public class Osnovni {
 	//izpis igralne plošče v terminalu
     public static void printPlosca() {
 
-        for (int i = 0; i < igra.velikost; ++i) {
+        for (int i = 0; i < Igra.velikost; ++i) {
             String out = "[";
 
          
             Polje[] row = igra.plosca[i];
-            for (int j = 0; j < igra.velikost; ++j) {
+            for (int j = 0; j < Igra.velikost; ++j) {
                 Polje v = row[j];
                 
                 if (v.equals(Polje.O)){

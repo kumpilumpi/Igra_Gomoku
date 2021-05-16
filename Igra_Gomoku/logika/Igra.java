@@ -1,6 +1,5 @@
 package logika;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -29,47 +28,42 @@ public class Igra {
 	public static int velikost = 7; // tukaj se nastavi velikost igre
 	public static final LinkedList<Linija> LINIJE =  new LinkedList<Linija>(); // vse linije (navpične (15), vodoravne(15), 2 x diagonalne (2x19))
 	
-	public static Linija pomozna_static(int x, int y, int[]smer) {
-		int[] xi = new int[Igra.velikost];
-		int[] yi = new int[Igra.velikost];
-		int indeks = 0;
+	public static void pomozna_static(int x, int y, int[]smer) { // 
+		LinkedList<Integer> xi = new LinkedList<Integer>();
+		LinkedList<Integer> yi = new LinkedList<Integer>();
 		
 		while(x >= 0 && x < Igra.velikost && y >= 0 && y < Igra.velikost) {
-			xi[indeks] = x;
-			yi[indeks] = y;
+			xi.add(x);
+			yi.add(y);
 			
 			x += smer[0];
 			y += smer[1];
-			indeks++;
 		}
 		
-		if(xi.length < 5) { // samo linije, z več kot 4 elementi doda
-			return null;
-		}
-		else {
-			return new Linija(xi,yi);
-		}
+		if(xi.size() > 4) { LINIJE.add(new Linija(xi,yi)); }
 	}
 		
 	static { // inicializacija LINIJE - se izvede le enkrat, ko prvic pozenemo program
 		
-		//NAPAKE
+		// Zgleda, da deluje potrebni dodatni testi
+		
+		
 		
 		for (int n = 0; n < Igra.velikost; n++) {
 			
-			LINIJE.add(pomozna_static(0, n, new int[] {1,0}));  	//navpicne linije 
-			LINIJE.add(pomozna_static(n, 0, new int[] {0,1}));  	//vodoravne
+			pomozna_static(0, n, new int[] {1,0});  					//vodoravne 
+			pomozna_static(n, 0, new int[] {0,1});  					//navpicne 
 			
-			LINIJE.add(pomozna_static(0, n, new int[] {1,1}));  	//desna diagonala zgornja vrstica
-			LINIJE.add(pomozna_static(0, n, new int[] {1,-1})); 	//leva diagonala zgornja vrstica
+			pomozna_static(n, 0, new int[] {1,1});  					//desna diagonala zgornja vrstica		
+			pomozna_static(n, 0, new int[] {-1,1}); 				    //leva diagonala zgornja vrstica
 			
 			if (n != 0) { //da se ena diagonala ne ponovi
-				LINIJE.add(pomozna_static(n, 0, new int[] {1,1}));  //desna diagonala prvi stolpec
-				LINIJE.add(pomozna_static(14, n, new int[] {-1,1}));//leva diagonala zadnji stolpec
+				pomozna_static( 0, n, new int[] {1,1});  			    //desna diagonala prvi stolpec
+				pomozna_static(Igra.velikost - 1, n, new int[] {-1,1}); //leva diagonala zadnji stolpec
 			}	
 			}
-		System.out.println(LINIJE);
-		System.out.println(LINIJE.size());
+//		System.out.println(LINIJE);
+//		System.out.println(LINIJE.size());
 			
 	}
 		

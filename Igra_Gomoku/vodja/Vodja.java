@@ -80,7 +80,6 @@ public class Vodja {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetnaIgra) {
-					
 					igra.poteza(poteza);
 					igramo ();
 				}

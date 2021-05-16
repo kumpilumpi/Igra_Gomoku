@@ -2,7 +2,9 @@ package inteligenca;
 
 import logika.Igra;
 import logika.Igralec;
+import logika.Linija;
 import logika.Polje;
+import java.util.LinkedList;
 
 public class OceniPozicijo {
 	//class, ki oceni potezo
@@ -25,7 +27,7 @@ public class OceniPozicijo {
 	 */
 	
 	
-	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
+	public static int oceniPozicijo2(Igra igra, Igralec igralec) {
 		
 		int pariO = 0;
 		int pariX = 0;
@@ -68,12 +70,64 @@ public class OceniPozicijo {
 
 	
 // ===========================================================
+	// ocena2  s pomočjo seznama linije
 	
-	public static int oceniPozicijo2(Igra igra, Igralec igralec) {
+	
+	
+	/**
+	 *	Ocena točkovanje
+	 *	- pogleda linijo -> pet zaporednih elementov
+	 *		- vseh 5 istih -> ZMAGA ( ne vem, če rabiva preverjat, ker se samo preverja v logiki in vodja zazna avtomatično. )
+	 *		- 4 + 1 PRAZNO -> 32
+	 *		- 3 + 2 PRAZNO -> 16
+	 *		- 2 + 3 PRAZNO -> 4
+	 *		- 1 + 4 PRAZNO -> 1
+	 *
+	 * -> minus vrednosti za nasprotnika 
+	 * -> Če je kar koli drugega + 0
+	 * 
+	 */
+	
+	
+	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
 		
 		
 		return 0;
 		
 	}
+	
+	public static int oceniLinija(Linija linija, Igra igra, Igralec igralec) {
+		int meja = linija.x.size() - 5;
+		int ocena = 0;
+		for (int i = 0; i < meja; i++ ) { // skozi cel seznam
+			int moj = 0;
+			int nasprotnik = 0; 
+			for (int k = 0; k < 5; k++) { //pogledamo vsako petorko
+				Polje element = igra.plosca[linija.y.get(i+k)][linija.x.get(i+k)];
+				if(element == Polje.PRAZNO) {
+					continue;
+				}else{
+					if (element == igra.naPoteziPolje(igralec)) {++moj;}else{ ++nasprotnik;}
+				}
+			}
+			if (nasprotnik > 0 && moj > 0) { //Če ima vsak v dani petki vsaj element se je ne bo moglo zapolnit
+				continue;
+			}
+			else if(nasprotnik == 0) { ocena += Math.pow(4, moj-1);} // mogoče splača sprobati 2^n ??
+			else {ocena -= Math.pow(4, nasprotnik-1);}
+		}
+		return ocena;
+	}
+	
+	public static int ocenaPomozna(int x) {
+		switch (x) {
+			case 1: return 1;
+			case 2: return 4;
+			case 3: return 16;
+			case 4: return 32;
+			default: return 0;
+		}
+	}
+	
 	
 }
