@@ -4,7 +4,6 @@ import logika.Igra;
 import logika.Igralec;
 import logika.Linija;
 import logika.Polje;
-import java.util.LinkedList;
 
 public class OceniPozicijo {
 	//class, ki oceni potezo
@@ -27,7 +26,7 @@ public class OceniPozicijo {
 	 */
 	
 	
-	public static int oceniPozicijo2(Igra igra, Igralec igralec) {
+	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
 		
 		int pariO = 0;
 		int pariX = 0;
@@ -78,7 +77,7 @@ public class OceniPozicijo {
 	 *	Ocena točkovanje
 	 *	- pogleda linijo -> pet zaporednih elementov
 	 *		- vseh 5 istih -> ZMAGA ( ne vem, če rabiva preverjat, ker se samo preverja v logiki in vodja zazna avtomatično. )
-	 *		- 4 + 1 PRAZNO -> 32
+	 *		- 4 + 1 PRAZNO -> 64
 	 *		- 3 + 2 PRAZNO -> 16
 	 *		- 2 + 3 PRAZNO -> 4
 	 *		- 1 + 4 PRAZNO -> 1
@@ -89,10 +88,12 @@ public class OceniPozicijo {
 	 */
 	
 	
-	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
-		
-		
-		return 0;
+	public static int oceniPozicijo2(Igra igra, Igralec igralec) {		
+		int ocena = 0;
+		for (Linija i : Igra.LINIJE) {
+			ocena += oceniLinija(i, igra, igralec);
+		}
+		return ocena;
 		
 	}
 	
@@ -113,8 +114,15 @@ public class OceniPozicijo {
 			if (nasprotnik > 0 && moj > 0) { //Če ima vsak v dani petki vsaj element se je ne bo moglo zapolnit
 				continue;
 			}
-			else if(nasprotnik == 0) { ocena += Math.pow(4, moj-1);} // mogoče splača sprobati 2^n ??
-			else {ocena -= Math.pow(4, nasprotnik-1);}
+			else if(nasprotnik == 0) {
+				if(moj == 0) { // vse prazno
+					continue;
+				}else {
+					ocena = ocena + (int) Math.pow(4, moj-1);
+				}
+					
+			} 
+			else {ocena = ocena - (int) Math.pow(4, nasprotnik-1);}
 		}
 		return ocena;
 	}

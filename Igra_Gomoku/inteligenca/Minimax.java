@@ -6,7 +6,6 @@ import logika.Igra;
 import logika.Igralec;
 
 import splosno.Koordinati;
-
 import inteligenca.OceniPozicijo;
 
 public class Minimax extends Inteligenca {
@@ -44,7 +43,7 @@ public class Minimax extends Inteligenca {
 			case NEODLOCENO: ocena = NEODLOC; break;
 			default:
 				// nekdo je na potezi
-				if (globina == 1) ocena = OceniPozicijo.oceniPozicijo1(kopijaIgre, jaz);
+				if (globina == 1) ocena = OceniPozicijo.oceniPozicijo2(kopijaIgre, jaz); // <- ZAČASNO NASTAVLJANJE KATERA OCENA MREŽE SE POKLIČE ===================================
 				// globina > 1
 				else ocena = minimax(kopijaIgre, globina-1, jaz).ocena;	
 			}
