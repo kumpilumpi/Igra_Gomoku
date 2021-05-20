@@ -103,13 +103,17 @@ public class Igra {
 	// ustvari kopijo igre
 	
 	public Igra(Igra igra) {
+		
 		this.moznePoteze = new LinkedList<Koordinati>();
+		this.odigranePoteze = new LinkedList<Koordinati>();
+		this.stanje = igra.stanje;
 		
 		this.plosca = new Polje[Igra.velikost][Igra.velikost];
 		for (int i = 0; i < Igra.velikost; i++) {
 			for (int j = 0; j < Igra.velikost; j++) {
 				// dodano 
-				if(igra.plosca[i][j] == Polje.PRAZNO) this.moznePoteze.add(new Koordinati(i,j)); //??
+				if(igra.plosca[i][j] == Polje.PRAZNO) this.moznePoteze.add(new Koordinati(i,j)); 
+				else {this.odigranePoteze.add(new Koordinati(i,j));}
 				this.plosca[i][j] = igra.plosca[i][j];
 			}
 		}
@@ -121,12 +125,6 @@ public class Igra {
 			this.kanditatiPoteze.add(p);
 		}
 		
-		//popravljeno
-		
-//		this.moznePoteze = igra.moznePoteze; -> moramo drugače incilizirat ker se med zanko drugače spremeni in javi napako
-		
-		this.odigranePoteze = igra.odigranePoteze;
-		this.stanje = igra.stanje;
 	}
 	
 	

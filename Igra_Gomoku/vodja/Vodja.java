@@ -58,9 +58,10 @@ public class Vodja {
 	
 	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static Inteligenca racunalnikovaInteligenca1 = new Minimax(4);
+	public static Inteligenca racunalnikovaInteligenca1 = new Minimax(3);
 	
-//	public static Inteligenca racunalnikovaInteligenca2 =
+	//minimax(3) igra zelo čudno
+	
 	
 	
 	
@@ -72,7 +73,7 @@ public class Vodja {
 			@Override
 			protected Koordinati doInBackground() {
 				Koordinati poteza = racunalnikovaInteligenca1.izberiPotezo(igra);
-   			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};				
+//   			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};				
 				return poteza;
 			}
 			

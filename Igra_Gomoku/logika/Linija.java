@@ -16,7 +16,7 @@ public class Linija {
 	}
 	
 	
-	//Samo za izpisovanje ,ni bistveno
+	//Samo za izpisovanje, ni bistveno
 	@Override
 	public String toString() {
 		String xstr = "";
