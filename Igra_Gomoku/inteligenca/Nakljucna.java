@@ -18,7 +18,6 @@ public class Nakljucna extends Inteligenca {
 		Random rand = new Random();
 		LinkedList<Koordinati> mozne = igra.moznePoteze;
 		int random = rand.nextInt(mozne.size());
-		
 		return mozne.get(random);
 	}
 

@@ -18,4 +18,10 @@ public class OcenjenaPoteza {
 		else return 0;
 	}
 
+	//izpisovanje
+	@Override
+	public String toString() {
+		
+		return String.valueOf(this.ocena) + " : " + this.poteza;
+	}
 }

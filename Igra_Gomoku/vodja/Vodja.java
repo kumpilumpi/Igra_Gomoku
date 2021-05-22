@@ -23,11 +23,10 @@ public class Vodja {
 	public static Map<Igralec,KdoIgra> kdoIgra;
 	
 	public static Okno okno;
-	
 	public static Igra igra = null;
-	
 	public static boolean clovekNaVrsti = false;
-		
+	
+	
 	public static void igramoNovoIgro () {
 		igra = new Igra ();
 		igramo ();
@@ -39,7 +38,7 @@ public class Vodja {
 		case ZMAGA_O:
 		case ZMAGA_X: 
 		case NEODLOCENO:
-			return; // odhajamo iz metode igramo
+			return; // zaključimo metodo igramo
 		case V_TEKU:
 			Igralec igralec = igra.naPotezi;
 			VrstaIgralca vrstaNaPotezi = vrstaIgralca.get(igralec);
@@ -54,13 +53,16 @@ public class Vodja {
 		}
 	}
 
+	
 	//Različne inteligence
 	
-	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
+//	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static Inteligenca racunalnikovaInteligenca1 = new Minimax(3);
+	public static Inteligenca racunalnikovaInteligenca = new Minimax(3);
 	
 	//minimax(3) igra zelo čudno
+	// Če ima zagotovljeno zmago, tudi če nasprotnik kaj blokira, jo mogoče ne odigra saj misli 
+	// da je vsaka poteza vredna 100 
 	
 	
 	
@@ -72,7 +74,7 @@ public class Vodja {
 			
 			@Override
 			protected Koordinati doInBackground() {
-				Koordinati poteza = racunalnikovaInteligenca1.izberiPotezo(igra);
+				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
 //   			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};				
 				return poteza;
 			}
@@ -82,17 +84,19 @@ public class Vodja {
 				Koordinati poteza = null;
 				try {poteza = get();} catch (Exception e) {};
 				if (igra == zacetnaIgra) {
-					igra.poteza(poteza);
+					igra.odigraj(poteza);
 					igramo ();
 				}
 			}
 		};
 		worker.execute();
 	}
-		
+	
+	
 	public static void igrajClovekovoPotezo(Koordinati poteza) {
-		if (igra.stanje.equals(Stanje.V_TEKU) && igra.poteza(poteza)) clovekNaVrsti = false; //preveri tudi stanje
-		igramo ();                                                                          //da ne moremo igrati po zmagi
+	//Počaka, da človek odigra potezo, preveri stanje, da nemoremeo igrati po zmagi
+		if (igra.stanje.equals(Stanje.V_TEKU) && igra.odigraj(poteza)) clovekNaVrsti = false; 
+		igramo ();                                                                        
 	}
 
 
