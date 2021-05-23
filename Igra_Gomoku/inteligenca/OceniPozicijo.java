@@ -14,7 +14,7 @@ public class OceniPozicijo {
 // =================================prvaOcena
 	
 // Slaba ocena, bolj za test na začetku, sedaj ni v uporabi
-// Ocena1 : preštejemo sosede (desna,desna diagonala spodaj, spodnja, leva diagonala spodaj)
+// Ocena1 : preštejemo sosede (desna, desna diagonala spodaj, spodnja, leva diagonala spodaj)
 	
 	public static int oceniPozicijo1(Igra igra, Igralec igralec) {
 		
@@ -67,6 +67,8 @@ public class OceniPozicijo {
 	 * 
 	 */
 	
+	// mogoče k vsaki oceni dodamo nek mali naključni del, da računalnik ni preveč predvidljv.
+	
 	public static int oceniPozicijo2(Igra igra, Igralec igralec) {		
 		int ocena = 0;
 		for (Linija i : Igra.LINIJE) {
@@ -107,16 +109,32 @@ public class OceniPozicijo {
 			}
 			else if(nasprotnik == 0) {
 				//moj != 0 && nasprotnik == 0
-				ocena = ocena + (int) Math.pow(3, moj-1);
+				ocena = ocena + ocena(moj); //(int) Math.pow(3, moj-1);
 			}
 			else {
 				//nasprotnik != 0 && moj == 0
-				ocena = ocena - (int) Math.pow(3, nasprotnik-1);
+				ocena = ocena - ocena(nasprotnik);
 			}
 		}
-		
 		return ocena;
 	}
+	
+	
+	public static int ocena (int zaporednih) {
+		switch(zaporednih) {
+			case 0: return 0;
+			case 1: return 1;
+			case 2: return 3;
+			case 3: return 9;
+			case 4: return 27;
+			case 5: return 1000;
+		}
+		return zaporednih;
+			
+	}
+	
+	
+	
 	
 	
 }
