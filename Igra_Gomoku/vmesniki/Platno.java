@@ -38,8 +38,8 @@ class Platno extends JPanel implements MouseListener {
 		//-- Izris mreže.
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
-		CELL_WIDTH = WIDTH/15;
-		CELL_HEIGHT = HEIGHT/15;
+		CELL_WIDTH = WIDTH/Igra.velikost;
+		CELL_HEIGHT = HEIGHT/Igra.velikost;;
 		
 		for (int r=1; r<ROWS; r++) {        //vodoravne crte
 			g2.drawLine(0, r*CELL_HEIGHT, WIDTH, r*CELL_HEIGHT);

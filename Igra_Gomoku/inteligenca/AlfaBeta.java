@@ -1,7 +1,5 @@
 package inteligenca;
 
-package inteligenca;
-
 import logika.Igra;
 import logika.Igralec;
 import splosno.Koordinati;
