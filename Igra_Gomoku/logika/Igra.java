@@ -20,6 +20,8 @@ public class Igra {
 	
 	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
 	
+	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
+	
 	//final static ==========================================
 	
 	public static int velikost = 15; // tukaj se nastavi velikost igre
@@ -70,6 +72,7 @@ public class Igra {
 		odigranePoteze = new LinkedList<Koordinati>(); 
 		moznePoteze = new LinkedList<Koordinati>();
 		kanditatiPoteze = new HashSet<Koordinati>();
+		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
 		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
 		
@@ -94,6 +97,8 @@ public class Igra {
 	// Za ustvarjanje kopije igre
 	public Igra(Igra igra) {
 		// !! ne sme biti this.plosca = igra.plosca , seznama imata isto mesto v pomnilniku
+		
+		this.zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
 		this.moznePoteze = new LinkedList<Koordinati>();
 		this.odigranePoteze = new LinkedList<Koordinati>();
@@ -131,6 +136,8 @@ public class Igra {
 	
 	public boolean pomozna (int v0, int s0, int dv, int ds) {
 	//Od zaceetnega polja (v0,s0) preveri koliko v vrsto jih je v smeri (dv,ds) in (-dv,-ds)
+		zmagovalnaVrsta.clear();
+		zmagovalnaVrsta.add(new Koordinati(s0,v0));
 		Polje primerjava = plosca[v0][s0];
 		int zaporedni = 1;
 		int[] smeri = new int[] {1,-1}; // 1 -> naprej, -1 -> nazaj
@@ -142,6 +149,7 @@ public class Igra {
 				while((zaporedni < 5) && (plosca[v0 + i*dv][s0 + i*ds].equals(primerjava))) {
 				i++;
 				zaporedni++;
+				zmagovalnaVrsta.add(new Koordinati(s0 + i*ds-ds, v0 + i*dv-dv));
 				}
 			}catch (IndexOutOfBoundsException e) {
 				continue;

@@ -18,11 +18,13 @@ class Platno extends JPanel implements MouseListener {
 		this.addMouseListener(this); // Listen own mouse events.
 	}
 	public static Okno okno;
-	private static final int ROWS = 15;
-	private static final int COLS = 15;
-	private static final int CELL_SIZE = 30; // Pixels
-	private static final int WIDTH  = COLS * CELL_SIZE;
-	private static final int HEIGHT = ROWS * CELL_SIZE;	
+	private static final int ROWS = Igra.velikost;
+	private static final int COLS = Igra.velikost;
+	private static int CELL_SIZE = 30; // Pixels
+	private static int WIDTH  = COLS * CELL_SIZE;
+	private static int HEIGHT = ROWS * CELL_SIZE;
+	private int CELL_WIDTH = WIDTH/15;
+	private int CELL_HEIGHT = HEIGHT/15;
  
 	//============================================== paintComponent
 	public void paintComponent(Graphics g) {
@@ -34,11 +36,16 @@ class Platno extends JPanel implements MouseListener {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
 				
 		//-- Izris mreže.
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		CELL_WIDTH = WIDTH/15;
+		CELL_HEIGHT = HEIGHT/15;
+		
 		for (int r=1; r<ROWS; r++) {        //vodoravne crte
-			g2.drawLine(0, r*CELL_SIZE, WIDTH, r*CELL_SIZE);
+			g2.drawLine(0, r*CELL_HEIGHT, WIDTH, r*CELL_HEIGHT);
 		}
 		for (int c=1; c<COLS; c++) {
-			g2.drawLine(c*CELL_SIZE, 0, c*CELL_SIZE, HEIGHT);
+			g2.drawLine(c*CELL_WIDTH, 0, c*CELL_WIDTH, HEIGHT);
 		}
 		
 		//zmagovalna vrsta se obarva
@@ -47,7 +54,7 @@ class Platno extends JPanel implements MouseListener {
 				int i = polje.getX();
 				int j = polje.getY();
 				g2.setColor(barvaZmaga);
-				g2.fillRect((int)(CELL_SIZE * i+1), (int)(CELL_SIZE * j+1), (int)CELL_SIZE-1, (int)CELL_SIZE-1);
+				g2.fillRect((int)(CELL_WIDTH * i+1), (int)(CELL_HEIGHT * j+1), (int)CELL_WIDTH-1, (int)CELL_HEIGHT-1);
 			}
 		}
 		
@@ -55,13 +62,13 @@ class Platno extends JPanel implements MouseListener {
 		if (Vodja.igra != null) {
 			for (int r=0; r<ROWS; r++) {
 				for (int c=0; c<COLS; c++) {
-					int x = c * CELL_SIZE;
-					int y = r * CELL_SIZE;
+					int x = c * CELL_WIDTH;
+					int y = r * CELL_HEIGHT;
 					Polje polje = Vodja.igra.plosca[r][c];
 					if (polje != Polje.PRAZNO) {
 						if(polje == Polje.X) g.setColor(barvaTemen);
 						else g.setColor(barvaSvetel);
-						g2.fillOval(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
+						g2.fillOval(x+2, y+2, CELL_WIDTH-4, CELL_HEIGHT-4);
 					}
 				}
 			}
@@ -72,8 +79,8 @@ class Platno extends JPanel implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		//--- map x,y coordinates into a row and col.
-		int col = e.getX()/CELL_SIZE;
-		int row = e.getY()/CELL_SIZE;
+		int col = e.getX()/CELL_WIDTH;
+		int row = e.getY()/CELL_HEIGHT;
 		
 		if (Vodja.igra != null && Vodja.clovekNaVrsti==true) Vodja.igrajClovekovoPotezo (new Koordinati(col, row));
 		
