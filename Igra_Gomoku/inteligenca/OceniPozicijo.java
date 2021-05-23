@@ -127,7 +127,7 @@ public class OceniPozicijo {
 			case 2: return 3;
 			case 3: return 9;
 			case 4: return 27;
-			case 5: return 1000;
+			case 5: return 81;
 		}
 		return zaporednih;
 			
