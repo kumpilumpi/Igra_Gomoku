@@ -1,41 +1,11 @@
 Opombe:
-
-GUI
-	- Dodajanje možnosti igranja proti računalniku
-	- Dodan package Vodja, po prefosorjevem zgledu.
-		- popravljene malenkosti, da se koda ujema z najinimi spremenljivkami.
-		- dodana inteligenca Naključna, samo izbere naključno potezo.
-		
-		- 
-		- 
-		
-	- V grafičnem vmesniku dodati možnost izbire nasprotnika.
-	- Rabiva metodo osveži. v classu okno -> Opravljeno
-	
-s
 INTELIGENCA
-	- ocenjevanje mreze -> prva verzija samo prešteje vse pare
-								- neučinkovita, slaba ocena
-			- definiramo shranimo si vse linije, kjer je lahko 5 v vrsto(vsi stolpci, vrstice, primerne diagonale;
-								
-	- Igri dodoamo spremenljivko, ki je trenutna ocena igre (+x zmaguje -crni zmaguje)
-								
-								
 	
-	- Delam na miniMax. 
-	- Treba dodati metodo za izluščenje kanditativ za primerne poteze.
-		-delam na temu
+	- Alfabeta ne zaključuje igre če ima zagotovljeno zmago.
+	- AlfaBeta ima samo en cutoff( ko alfa >= beta) ??
+	
 
 
-
-
- Komen
-
-
-
-- Opombe pri združevanju kode:
-	- platno: ROWS/COLS naj bosta nastavljena na igra.velikost
-	- logika/igra: Konstruktor za kopiranje ne nastavi vseh spremenljivk
 
 
 
