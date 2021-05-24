@@ -1,6 +1,5 @@
 package inteligenca;
 
-
 import logika.Igra;
 import logika.Igralec;
 import splosno.Koordinati;
@@ -41,7 +40,7 @@ public class AlfaBeta extends Inteligenca {
 		OcenjenaPoteza najboljsaPoteza = null;
 		
 		//Računalnik max -> ZGUBA , Igralec min -> ZMAGA 
-		najboljsaPoteza = new OcenjenaPoteza(igra.moznePoteze.get(0),(igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
+		najboljsaPoteza = new OcenjenaPoteza(igra.moznePoteze.get(0), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
 			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj
 		
 		for (Koordinati p: igra.kanditatiPoteze) {
@@ -66,7 +65,6 @@ public class AlfaBeta extends Inteligenca {
 					najboljsaPoteza = new OcenjenaPoteza(p, ocena);
 					alfa = (alfa > najboljsaPoteza.ocena) ? alfa : najboljsaPoteza.ocena;
 				}
-			
 			} else { // igra.naPotezi() != jaz,  minimiziramo oceno
 				if (ocena < najboljsaPoteza.ocena) {
 					najboljsaPoteza = new OcenjenaPoteza(p, ocena);
@@ -76,6 +74,7 @@ public class AlfaBeta extends Inteligenca {
 			if (alfa >= beta) {
 				// Izstopimo iz zanke
 				return najboljsaPoteza;
+			}
 		}
 		return najboljsaPoteza;
 	}

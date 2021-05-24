@@ -5,7 +5,7 @@ public enum VrstaIgralca {
 	
 	@Override
 	public String toString() {
-		return (this.equals(C)) ? "Človek" : "Računalnkik";		
+		return (this.equals(C)) ? "Človek" : "Računalnik";		
 	}
 
 }
