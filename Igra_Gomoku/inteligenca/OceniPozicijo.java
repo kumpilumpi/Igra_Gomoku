@@ -68,6 +68,7 @@ public class OceniPozicijo {
 	 */
 	
 	// mogoče k vsaki oceni dodamo nek mali naključni del, da računalnik ni preveč predvidljv.
+	// če najde dvakrat zapored peterko z 4 istimi, ocenimo z ZMAGA
 	
 	public static int oceniPozicijo2(Igra igra, Igralec igralec) {		
 		int ocena = 0;

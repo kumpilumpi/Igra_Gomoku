@@ -3,6 +3,10 @@ INTELIGENCA
 	
 	- Alfabeta ne zaključuje igre če ima zagotovljeno zmago.
 	- AlfaBeta ima samo en cutoff( ko alfa >= beta) ??
+	- KO ima zagotovlejno zmago poraz igra kr nekaj
+	- Še dodaten krajši koordinati seznam, ko je veliko potez, da igra hitreje.
+		- Za kandidate le okolica zadnjih treh potez?? pa povečamo globino.
+		- posebej ocenit 4 v vrsto z dvema praznima 
 	
 
 

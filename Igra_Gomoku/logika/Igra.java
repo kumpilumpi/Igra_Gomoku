@@ -199,7 +199,7 @@ public class Igra {
 	public boolean jeLegalna(Koordinati poteza) {
 	//Preveri če je poteza legalna
 		if (poteza == null) return false; // prazna poteza je ilegalna
-		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO)) {
+		if (plosca[poteza.getY()][poteza.getX()].equals(Polje.PRAZNO) && (poteza.getX() < Igra.velikost) && (poteza.getY() < Igra.velikost)) {
 			return true;
 		}
 		else return false;
