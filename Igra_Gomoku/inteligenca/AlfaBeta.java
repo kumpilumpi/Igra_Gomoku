@@ -28,6 +28,7 @@ public class AlfaBeta extends Inteligenca {
 		OcenjenaPoteza najboljsaPoteza = alfaBeta(igra, this.globina, ZGUBA, ZMAGA,igra.naPotezi);
 
 		System.out.println(najboljsaPoteza); // <- preverjanje
+		System.out.println(igra.kanditatiPoteze.size() + "  " + igra.kanditatiPotezeKrajsi.size());
 		
 		return najboljsaPoteza.poteza;	
 	}
@@ -43,7 +44,7 @@ public class AlfaBeta extends Inteligenca {
 		najboljsaPoteza = new OcenjenaPoteza(igra.moznePoteze.get(0), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
 			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj
 		
-		for (Koordinati p: igra.kanditatiPoteze) {
+		for (Koordinati p: igra.kanditatiPoteze) { // <--------- igra.kanditatiPotezeKrajsi
 			
 			int ocena;
 			Igra kopijaIgre = new Igra(igra);

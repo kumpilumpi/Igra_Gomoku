@@ -19,6 +19,7 @@ public class Igra {
 	public LinkedList<Koordinati> moznePoteze; //ne vem če sploh kaj rabva
 	
 	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
+	public Set<Koordinati> kanditatiPotezeKrajsi; // <----------------------K
 	
 	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
 	
@@ -72,9 +73,11 @@ public class Igra {
 		odigranePoteze = new LinkedList<Koordinati>(); 
 		moznePoteze = new LinkedList<Koordinati>();
 		kanditatiPoteze = new HashSet<Koordinati>();
+		kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------K
 		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
 		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
+		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); //<-------------------K
 		
 		//napolni mozne poteze
 		for ( int x = 0; x < velikost; x++ ) { 
@@ -118,6 +121,12 @@ public class Igra {
 		for (Koordinati p : igra.kanditatiPoteze) {
 			this.kanditatiPoteze.add(p);
 		}
+		
+		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------
+		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
+			this.kanditatiPotezeKrajsi.add(p);
+		}
+		
 	}
 	
 	
@@ -248,11 +257,17 @@ public class Igra {
 		int y0 = zadnjaPoteza.getY();
 		kanditatiPoteze.remove(zadnjaPoteza); 
 		// iz množice kandidatov odstrani zadnjo odigrano potezo 
+		
+		kanditatiPotezeKrajsi.remove(zadnjaPoteza); // <----------------------K
+		
 		for( int x = -2; x<3; x++ ) {
 			for (int y = -2; y < 3; y++) {
 				try {
 					if(plosca[y0-y][x0-x]== Polje.PRAZNO) {
 						kanditatiPoteze.add(new Koordinati(x0-x,y0-y));
+						if(Math.abs(x) < 2 && Math.abs(y) < 2 ){ // <----------------------K
+							kanditatiPotezeKrajsi.add(new Koordinati(x0-x,y0-y));
+						}
 					}
 				}catch (IndexOutOfBoundsException e) {
 					continue;
@@ -261,6 +276,8 @@ public class Igra {
 		}
 	}
 
-
+	
+	
+	
 	
 }
