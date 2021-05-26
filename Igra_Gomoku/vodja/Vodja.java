@@ -59,7 +59,7 @@ public class Vodja {
 	
 //	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static InteligencaPomozna racunalnikovaInteligenca = new AlfaBeta(4);
+	public static InteligencaPomozna racunalnikovaInteligenca = new Minimax(3);
 	
 	//minimax(3) igra zelo čudno
 	// Če ima zagotovljeno zmago, tudi če nasprotnik kaj blokira, jo mogoče ne odigra saj misli 

@@ -8,6 +8,8 @@ import splosno.Koordinati;
 
 public class OceniPozicijo {
 	//class, ki oceni potezo
+	
+	public static boolean soStiri;
 
 	
 	
@@ -124,12 +126,28 @@ public class OceniPozicijo {
 	public static int ocena (int zaporednih) {
 		switch(zaporednih) {
 		
-			case 0: return 0;
-			case 1: return 1;
-			case 2: return 3;
-			case 3: return 9;
-			case 4: return 27;
-			case 5: return 81;
+			case 0: 
+				soStiri = false;
+				return 0;
+			case 1: 
+				soStiri = false;
+				return 1;
+			case 2: 
+				soStiri = false;
+				return 3;
+			case 3: 
+				soStiri = false;
+				return 9;
+			case 4:	
+				if (soStiri) {
+					soStiri = false;
+					return 1000;
+				}
+				soStiri = true;
+				return 81;
+			case 5: 
+				soStiri = false;
+				return 1000;
 			
 		}
 		return zaporednih;

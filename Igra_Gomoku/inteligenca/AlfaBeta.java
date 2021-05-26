@@ -41,10 +41,10 @@ public class AlfaBeta extends InteligencaPomozna {
 		OcenjenaPoteza najboljsaPoteza = null;
 		
 		//Računalnik max -> ZGUBA , Igralec min -> ZMAGA 
-		najboljsaPoteza = new OcenjenaPoteza(igra.moznePoteze.get(0), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
+		najboljsaPoteza = new OcenjenaPoteza(igra.kanditatiPoteze.iterator().next(), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
 			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj
 		
-		for (Koordinati p: igra.kanditatiPoteze) { // <--------- igra.kanditatiPotezeKrajsi
+		for (Koordinati p : igra.kanditatiPoteze) { // <--------- igra.kanditatiPotezeKrajsi
 			
 			int ocena;
 			Igra kopijaIgre = new Igra(igra);
@@ -59,7 +59,6 @@ public class AlfaBeta extends InteligencaPomozna {
 				// globina > 1
 				else ocena = alfaBeta(kopijaIgre, globina-1, alfa, beta, jaz).ocena;
 			}
-			
 			if (igra.naPotezi == jaz) {
 				// Maksimiramo oceno
 				if (ocena > najboljsaPoteza.ocena) { 
@@ -70,7 +69,7 @@ public class AlfaBeta extends InteligencaPomozna {
 				if (ocena < najboljsaPoteza.ocena) {
 					najboljsaPoteza = new OcenjenaPoteza(p, ocena);
 					beta = (beta < najboljsaPoteza.ocena) ? beta : najboljsaPoteza.ocena;					
-				}	
+				}
 			}
 			if (alfa >= beta) {
 				// Izstopimo iz zanke
