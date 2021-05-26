@@ -22,10 +22,12 @@ public class Igra {
 	public Set<Koordinati> kanditatiPotezeKrajsi; // <----------------------K
 	
 	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
+
+	public Object kandidatiPotezeKrajsi;
 	
 	//final static ==========================================
 	
-	public static int velikost = 19; // tukaj se nastavi velikost igre
+	public static int velikost = 15; // tukaj se nastavi velikost igre
 	public static final LinkedList<Linija> LINIJE =  new LinkedList<Linija>(); // vse linije (navpične (15), vodoravne(15), 2 x diagonalne (2x19))
 	
 	public static void pomozna_static(int x, int y, int[]smer) { 

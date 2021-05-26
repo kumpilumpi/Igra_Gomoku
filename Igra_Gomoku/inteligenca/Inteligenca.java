@@ -1,25 +1,45 @@
 package inteligenca;
 
 import logika.Igra;
-
+import logika.Igralec;
 import splosno.Koordinati;
 import splosno.KdoIgra;
 
-// Paket inteligenca naj vsebuje (konkretni) razred Inteligenca ki je podrazred razreda splosno.KdoIgra 
-// (na predavanjih je bil Inteligenca abstraktni razred)
-
-public abstract class Inteligenca extends KdoIgra { 
+public class Inteligenca extends KdoIgra { 
 	
 	public Inteligenca (String ime) {
 		super(ime);
 	}
 	
-	public abstract Koordinati izberiPotezo(Igra igra); 
-
+	public Koordinati izberiPotezo(Igra igra) {
+		// vračanje odgovora za tekmovanje
+		
+		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
+			Igra kopijaIgre = new Igra(igra);
+			kopijaIgre.odigraj(p);
+			switch (kopijaIgre.stanje) {
+				case ZMAGA_O: return p;
+				case ZMAGA_X: return p;
+			default:
+				break;
+			}
+		}
+		
+		//Pokliči alfaBeta
+		
+		
+		
+		
+		
+			
+			
+		// uporaba alfaBeta algoritma
+		// Določit parametre ocene
+		// 
+		
+		
+		return null;
+		
+	}
 }
 
-//NAVODILA
-//Razred Inteligenca naj ima javno (nestatično) metodo Koordinati izberiPotezo(Igra igra), 
-//ki implementira rešitev skupine za inteligentnega igralca igre Gomoku. Na tekmovanju bo čas 
-//za potezo omejen na 5 sekund. Preverite,
-//da vaša metoda izberiPotezo ne potrebuje več kot 5 sekund na plošči velikosti 15 × 15.

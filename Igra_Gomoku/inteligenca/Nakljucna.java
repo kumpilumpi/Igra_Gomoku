@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import logika.Igra;
 import splosno.Koordinati;
 
-public class Nakljucna extends Inteligenca {
+public class Nakljucna extends InteligencaPomozna {
 
 	public Nakljucna(String ime) {
 		super("Naključna");
