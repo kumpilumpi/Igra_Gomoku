@@ -6,7 +6,7 @@ import splosno.Koordinati;
 
 
 
-public class AlfaBeta extends Inteligenca {
+public class AlfaBeta extends InteligencaPomozna {
 //Predelava kode za MiniMax
 	
 	//Konstante

@@ -6,7 +6,7 @@ import splosno.Koordinati;
 
 
 
-public class Minimax extends Inteligenca {
+public class Minimax extends InteligencaPomozna {
 	
 	//Konstante
 	private static final int ZMAGA = 1000;
