@@ -50,7 +50,7 @@ public class Osnovni {
 			else if (igra.stanje == Stanje.NEODLOCENO) {
 				System.out.print("Neodločen izid!");
 			}
-			for (Koordinati poteza : igra.kanditatiPoteze) {
+			for (Koordinati poteza : igra.kanditatiPotezeKrajsi) {
 				System.out.println(poteza);
 			}
 			

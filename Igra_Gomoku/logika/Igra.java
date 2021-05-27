@@ -18,7 +18,7 @@ public class Igra {
 
 	public LinkedList<Koordinati> moznePoteze; 
 	
-	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco (do dve polji oddaljeni sosedi)
+//	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco (do dve polji oddaljeni sosedi)
 	public Set<Koordinati> kanditatiPotezeKrajsi; // (Eno polje oddaljeni sosedi)
 	
 	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
@@ -72,13 +72,10 @@ public class Igra {
 		
 		// ustvari prazne LinkedList sezname
 		odigranePoteze = new LinkedList<Koordinati>(); 
-		kanditatiPoteze = new HashSet<Koordinati>();
 		kanditatiPotezeKrajsi = new HashSet<Koordinati>();
 		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
-		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); 
 			// Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
-		
 		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2));
 		
 		
@@ -90,7 +87,7 @@ public class Igra {
 				}
 			}
 		
-		naPotezi = Igralec.O;
+		naPotezi = Igralec.X;
 	}
 
 	// Za ustvarjanje kopije igre
@@ -111,11 +108,6 @@ public class Igra {
 				if(igra.plosca[i][j] != Polje.PRAZNO) {this.odigranePoteze.add(new Koordinati(i,j));}
 				this.plosca[i][j] = igra.plosca[i][j];
 			}
-		}
-		
-		this.kanditatiPoteze = new HashSet<Koordinati>();
-		for (Koordinati p : igra.kanditatiPoteze) {
-			this.kanditatiPoteze.add(p);
 		}
 		
 		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>();
@@ -248,20 +240,15 @@ public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // <-- Uporabljena??
 		
 		int x0 = zadnjaPoteza.getX();
 		int y0 = zadnjaPoteza.getY();
-		kanditatiPoteze.remove(zadnjaPoteza); 
-		// iz množice kandidatov odstrani zadnjo odigrano potezo 
 		
 		kanditatiPotezeKrajsi.remove(zadnjaPoteza); // <----------------------K
 		
-		for( int x = -2; x<3; x++ ) {
-			for (int y = -2; y < 3; y++) {
+		for( int x = -1; x<2; x++ ) {
+			for (int y = -1; y < 2; y++) {
 				try {
 					if(plosca[y0-y][x0-x]== Polje.PRAZNO) {
-						kanditatiPoteze.add(new Koordinati(x0-x,y0-y));
-						if(Math.abs(x) < 2 && Math.abs(y) < 2 ){ // <----------------------K
-							kanditatiPotezeKrajsi.add(new Koordinati(x0-x,y0-y));
+						kanditatiPotezeKrajsi.add(new Koordinati(x0-x,y0-y));
 						}
-					}
 				}catch (IndexOutOfBoundsException e) {
 					continue;
 				}

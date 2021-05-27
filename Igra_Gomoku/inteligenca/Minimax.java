@@ -35,7 +35,7 @@ public class Minimax extends InteligencaPomozna {
 	//Vrne najboljso ocenjeno potezo z vidika igralca (jaz)
 		OcenjenaPoteza najboljsaPoteza = null;
 
-		for (Koordinati p: igra.kanditatiPoteze) { 
+		for (Koordinati p: igra.kanditatiPotezeKrajsi) { 
 			
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);

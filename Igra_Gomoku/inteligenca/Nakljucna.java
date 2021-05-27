@@ -14,7 +14,7 @@ public class Nakljucna extends InteligencaPomozna {
 
 	@Override
 	public Koordinati izberiPotezo(Igra igra) {
-		return igra.kanditatiPoteze.iterator().next();
+		return igra.kanditatiPotezeKrajsi.iterator().next();
 	}
 
 }
