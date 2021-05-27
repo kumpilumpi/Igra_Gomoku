@@ -47,7 +47,13 @@ public class Vodja {
 			case C: 
 				clovekNaVrsti = true;
 				break;
-			case R:
+			case random:
+				igrajRacunalnikovoPotezo();
+				break;
+			case minimax:
+				igrajRacunalnikovoPotezo();
+				break;
+			case alfabeta:
 				igrajRacunalnikovoPotezo();
 				break;
 			}
@@ -59,8 +65,7 @@ public class Vodja {
 	
 //	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static InteligencaPomozna racunalnikovaInteligenca = new Minimax(3);
-	
+	public static InteligencaPomozna racunalnikovaInteligenca;
 	//minimax(3) igra zelo čudno
 	// Če ima zagotovljeno zmago, tudi če nasprotnik kaj blokira, jo mogoče ne odigra saj misli 
 	// da je vsaka poteza vredna 100 
@@ -70,11 +75,28 @@ public class Vodja {
 	
 	public static void igrajRacunalnikovoPotezo() {
 		Igra zacetnaIgra = igra;
+		Igralec igralec = igra.naPotezi;
+		VrstaIgralca vrstaNaPotezi = vrstaIgralca.get(igralec);
+		switch(vrstaNaPotezi) {
+		
+		case random:
+			racunalnikovaInteligenca = new Nakljucna("hello");
+			break;
+		case minimax:
+			racunalnikovaInteligenca = new Minimax(2);
+			break;
+		case alfabeta:
+			racunalnikovaInteligenca = new AlfaBeta(3);
+			break;
+	}
 		
 		SwingWorker<Koordinati, Void> worker = new SwingWorker<Koordinati, Void> () {
 			
+			
+			
 			@Override
 			protected Koordinati doInBackground() {
+				
 				Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
 //   			try {TimeUnit.SECONDS.sleep(1);} catch (Exception e) {};				
 				return poteza;

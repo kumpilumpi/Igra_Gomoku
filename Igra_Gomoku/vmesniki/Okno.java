@@ -39,6 +39,10 @@ public class Okno extends JFrame implements ActionListener {
 	private JMenuItem crniMinimax;
 	private JMenuItem suspend;
 	
+	public VrstaIgralca random;
+	public VrstaIgralca beli;
+	public  VrstaIgralca crni;
+	
 	/**
 	 * Ustvari novo glavno okno in prični igrati igro.
 	 */
@@ -88,19 +92,19 @@ public class Okno extends JFrame implements ActionListener {
 		JMenu crni_menu = new JMenu("Črni Igralec");
 		intel_menu.add(crni_menu);		
 
-		beliRand = new JMenuItem("Naključno");
+		beliRand = new JMenuItem("Minimax");
 		beli_menu.add(beliRand);
 		beliRand.addActionListener(this);
 		
-		crniRand = new JMenuItem("Naključno");
+		crniRand = new JMenuItem("Minimax");
 		crni_menu.add(crniRand);
 		crniRand.addActionListener(this);
 		
-		beliMinimax = new JMenuItem("Minimax");
+		beliMinimax = new JMenuItem("AlfaBeta");
 		beli_menu.add(beliMinimax);
 		beliMinimax.addActionListener(this);
 		
-		crniMinimax = new JMenuItem("Minimax");
+		crniMinimax = new JMenuItem("AlfaBeta");
 		crni_menu.add(crniMinimax);
 		crniMinimax.addActionListener(this);
 		
@@ -151,19 +155,19 @@ public class Okno extends JFrame implements ActionListener {
 		else if (e.getSource() == igraClovekRacunalnik) {
 			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
 			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.C); 
-			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.R);
+			Vodja.vrstaIgralca.put(Igralec.X, crni);
 			Vodja.igramoNovoIgro();
 			} 
 		else if (e.getSource() == igraRacunalnikClovek) {
 			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
-			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.R); 
+			Vodja.vrstaIgralca.put(Igralec.O, beli); 
 			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.C);
 			Vodja.igramoNovoIgro();
 		}
 		else if (e.getSource() == igraRacunalnikRacunalnik) {
 			Vodja.vrstaIgralca = new EnumMap<Igralec,VrstaIgralca>(Igralec.class);
-			Vodja.vrstaIgralca.put(Igralec.O, VrstaIgralca.R); 
-			Vodja.vrstaIgralca.put(Igralec.X, VrstaIgralca.R);
+			Vodja.vrstaIgralca.put(Igralec.O, beli); 
+			Vodja.vrstaIgralca.put(Igralec.X, crni);
 			Vodja.igramoNovoIgro();
 		}
 		
@@ -173,19 +177,23 @@ public class Okno extends JFrame implements ActionListener {
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == beliRand) {
-			status.setText("Beli igralec igra naključno.");
+			beli = VrstaIgralca.minimax;
+			status.setText("Beli igralec igra z Minimax.");
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == crniRand) {
-			status.setText("Črni igralec igra naključno.");
+			status.setText("Črni igralec igra z Minimax.");
+			crni = VrstaIgralca.minimax;
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == beliMinimax) {
-			status.setText("Beli igralec igra z minimax.");
+			status.setText("Beli igralec igra z AlfaBeta.");
+			beli = VrstaIgralca.alfabeta;
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == crniMinimax) {
-			status.setText("Črni igralec igra z minimax.");
+			status.setText("Črni igralec igra z AlfaBeta.");
+			crni = VrstaIgralca.alfabeta;
 		}
 		
 		

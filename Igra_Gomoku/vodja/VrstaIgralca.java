@@ -1,7 +1,7 @@
 package vodja;
 
 public enum VrstaIgralca {
-	R, C; //samo zamenjal oznake 
+	minimax, alfabeta, random, C; //samo zamenjal oznake 
 	
 	@Override
 	public String toString() {
