@@ -86,7 +86,7 @@ public class Vodja {
 			racunalnikovaInteligenca = new Minimax(2);
 			break;
 		case alfabeta:
-			racunalnikovaInteligenca = new AlfaBeta(4);
+			racunalnikovaInteligenca = new AlfaBeta(3);
 			break;
 	}
 		
