@@ -33,7 +33,9 @@ public class Inteligenca extends KdoIgra {
 		}
 		
 		//Pokliči alfaBeta
-		
+//		if(igra.odigranePoteze.size() < 15) {
+//			racunalnikovaInteligenca = new AlfaBeta(1);
+//		}
 		
 		InteligencaPomozna racunalnikovaInteligenca = new AlfaBeta(3);
 		

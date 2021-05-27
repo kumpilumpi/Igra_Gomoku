@@ -1,6 +1,6 @@
 package inteligenca;
 import java.util.Random;
-
+import java.util.Set;
 import java.util.LinkedList;
 
 import logika.Igra;
@@ -14,10 +14,7 @@ public class Nakljucna extends InteligencaPomozna {
 
 	@Override
 	public Koordinati izberiPotezo(Igra igra) {
-		Random rand = new Random();
-		LinkedList<Koordinati> mozne = igra.moznePoteze;
-		int random = rand.nextInt(mozne.size());
-		return mozne.get(random);
+		return igra.kanditatiPoteze.iterator().next();
 	}
 
 }

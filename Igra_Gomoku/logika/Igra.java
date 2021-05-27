@@ -16,7 +16,7 @@ public class Igra {
 	
 	public LinkedList<Koordinati> odigranePoteze;
 
-	public LinkedList<Koordinati> moznePoteze; //ne vem če sploh kaj rabva
+	public LinkedList<Koordinati> moznePoteze; 
 	
 	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco (do dve polji oddaljeni sosedi)
 	public Set<Koordinati> kanditatiPotezeKrajsi; // (Eno polje oddaljeni sosedi)
@@ -72,7 +72,6 @@ public class Igra {
 		
 		// ustvari prazne LinkedList sezname
 		odigranePoteze = new LinkedList<Koordinati>(); 
-		moznePoteze = new LinkedList<Koordinati>();
 		kanditatiPoteze = new HashSet<Koordinati>();
 		kanditatiPotezeKrajsi = new HashSet<Koordinati>();
 		zmagovalnaVrsta = new LinkedList<Koordinati>();
@@ -82,13 +81,6 @@ public class Igra {
 		
 		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2));
 		
-		
-		//napolni mozne poteze
-		for ( int x = 0; x < velikost; x++ ) { 
-			for ( int y = 0; y < velikost; y++ ) {
-				moznePoteze.add(new Koordinati(x,y));
-			}
-		}
 		
 		//ustvari plosco
 		plosca = new Polje[velikost][velikost];
@@ -116,8 +108,7 @@ public class Igra {
 		this.plosca = new Polje[Igra.velikost][Igra.velikost];
 		for (int i = 0; i < Igra.velikost; i++) {
 			for (int j = 0; j < Igra.velikost; j++) {
-				if(igra.plosca[i][j] == Polje.PRAZNO) this.moznePoteze.add(new Koordinati(i,j)); 
-				else {this.odigranePoteze.add(new Koordinati(i,j));}
+				if(igra.plosca[i][j] != Polje.PRAZNO) {this.odigranePoteze.add(new Koordinati(i,j));}
 				this.plosca[i][j] = igra.plosca[i][j];
 			}
 		}
@@ -230,7 +221,6 @@ public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // <-- Uporabljena??
 			naslednji();
 			odigranePoteze.add(poteza);
 			kandidatiPoteze(poteza);
-			moznePoteze.remove(poteza);
 			stanje();
 			return true;
 		}

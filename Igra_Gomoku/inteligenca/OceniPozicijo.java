@@ -141,13 +141,15 @@ public class OceniPozicijo {
 			case 4:	
 				if (OceniPozicijo.soStiri) {
 					OceniPozicijo.soStiri = false;
+					System.out.println("Sostiri");
 					return 1000;
 				}
 				OceniPozicijo.soStiri = true;
-				return 81;
+				return 27;
 			case 5: 
 				OceniPozicijo.soStiri = false;
-				return 1000;
+				System.out.println("5");
+				return 81;
 			
 		}
 		return zaporednih;
