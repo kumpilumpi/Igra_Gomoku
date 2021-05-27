@@ -7,13 +7,20 @@ import splosno.KdoIgra;
 
 public class Inteligenca extends KdoIgra { 
 	
+	public Inteligenca() {
+		super("TeoJaka");
+	}
+	
 	public Inteligenca (String ime) {
 		super(ime);
 	}
 	
+// Vračanje odgovora na tekmovanju
 	public Koordinati izberiPotezo(Igra igra) {
-		// vračanje odgovora za tekmovanje
 		
+		
+		//ker alfa beta noče zaključit zmagovalne poteze
+		//odigra potezo, če ta prinese zmago ali bi prnesla poraz
 		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
 			Igra kopijaIgre = new Igra(igra);
 			kopijaIgre.odigraj(p);
@@ -28,6 +35,19 @@ public class Inteligenca extends KdoIgra {
 		//Pokliči alfaBeta
 		
 		
+		InteligencaPomozna racunalnikovaInteligenca = new AlfaBeta(3);
+		
+		Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
+		
+		return poteza;
+		
+		//Če je igra dokaj začetna prvih 5 potez globina 3
+		
+		//Glavni del igre seznam 
+		
+		//Če igra se končuje zadnjih 10 potez -> globina 5
+		
+		
 		
 		
 		
@@ -37,8 +57,6 @@ public class Inteligenca extends KdoIgra {
 		// Določit parametre ocene
 		// 
 		
-		
-		return null;
 		
 	}
 }

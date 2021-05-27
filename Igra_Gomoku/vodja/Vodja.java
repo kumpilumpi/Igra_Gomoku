@@ -5,6 +5,7 @@ import javax.swing.SwingWorker;
 import java.util.concurrent.TimeUnit;
 import vmesniki.Okno;
 import inteligenca.AlfaBeta;
+import inteligenca.Inteligenca;
 import inteligenca.InteligencaPomozna;
 import inteligenca.Minimax;
 import inteligenca.Nakljucna;
@@ -59,7 +60,9 @@ public class Vodja {
 	
 //	public static Inteligenca racunalnikovaInteligenca = new Nakljucna("Naključna poteza") ;// <-String z imenom
 	
-	public static InteligencaPomozna racunalnikovaInteligenca = new Minimax(3);
+	public static InteligencaPomozna racunalnikovaInteligenca2 = new AlfaBeta(3);
+	public static Inteligenca racunalnikovaInteligenca = new Inteligenca();
+	
 	
 	//minimax(3) igra zelo čudno
 	// Če ima zagotovljeno zmago, tudi če nasprotnik kaj blokira, jo mogoče ne odigra saj misli 

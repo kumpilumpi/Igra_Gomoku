@@ -127,26 +127,26 @@ public class OceniPozicijo {
 		switch(zaporednih) {
 		
 			case 0: 
-				soStiri = false;
+				OceniPozicijo.soStiri = false;
 				return 0;
 			case 1: 
-				soStiri = false;
+				OceniPozicijo.soStiri = false;
 				return 1;
 			case 2: 
-				soStiri = false;
+				OceniPozicijo.soStiri = false;
 				return 3;
 			case 3: 
-				soStiri = false;
-				return 9;
+				OceniPozicijo.soStiri = false;
+				return 20;
 			case 4:	
-				if (soStiri) {
-					soStiri = false;
+				if (OceniPozicijo.soStiri) {
+					OceniPozicijo.soStiri = false;
 					return 1000;
 				}
-				soStiri = true;
-				return 81;
+				OceniPozicijo.soStiri = true;
+				return 200;
 			case 5: 
-				soStiri = false;
+				OceniPozicijo.soStiri = false;
 				return 1000;
 			
 		}

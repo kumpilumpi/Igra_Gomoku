@@ -42,7 +42,7 @@ public class AlfaBeta extends InteligencaPomozna {
 		
 		//Računalnik max -> ZGUBA , Igralec min -> ZMAGA 
 		najboljsaPoteza = new OcenjenaPoteza(igra.kanditatiPoteze.iterator().next(), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
-			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj
+			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj		
 		
 		for (Koordinati p : igra.kanditatiPoteze) { // <--------- igra.kanditatiPotezeKrajsi
 			
@@ -76,6 +76,7 @@ public class AlfaBeta extends InteligencaPomozna {
 				return najboljsaPoteza;
 			}
 		}
+		
 		return najboljsaPoteza;
 	}
 	
