@@ -137,14 +137,14 @@ public class OceniPozicijo {
 				return 3;
 			case 3: 
 				OceniPozicijo.soStiri = false;
-				return 20;
+				return 9;
 			case 4:	
 				if (OceniPozicijo.soStiri) {
 					OceniPozicijo.soStiri = false;
 					return 1000;
 				}
 				OceniPozicijo.soStiri = true;
-				return 200;
+				return 81;
 			case 5: 
 				OceniPozicijo.soStiri = false;
 				return 1000;

@@ -18,12 +18,10 @@ public class Igra {
 
 	public LinkedList<Koordinati> moznePoteze; //ne vem če sploh kaj rabva
 	
-	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
-	public Set<Koordinati> kanditatiPotezeKrajsi; // <----------------------K
+	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco (do dve polji oddaljeni sosedi)
+	public Set<Koordinati> kanditatiPotezeKrajsi; // (Eno polje oddaljeni sosedi)
 	
 	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
-
-	public Object kandidatiPotezeKrajsi;
 	
 	//final static ==========================================
 	
@@ -47,7 +45,7 @@ public class Igra {
 	}
 		
 	static { 
-	// inicializacija LINIJE - se izvede le enkrat, ko prvic pozenemo program		
+	// inicializacija LINIJE - se izvede le enkrat, ko prvič pozenemo program		
 		for (int n = 0; n < Igra.velikost; n++) {
 			
 			pomozna_static(0, n, new int[] {1,0});  					//vodoravne 
@@ -71,15 +69,19 @@ public class Igra {
 	public Igra(int n) {
 		velikost = n;
 		this.stanje = Stanje.V_TEKU;
+		
 		// ustvari prazne LinkedList sezname
 		odigranePoteze = new LinkedList<Koordinati>(); 
 		moznePoteze = new LinkedList<Koordinati>();
 		kanditatiPoteze = new HashSet<Koordinati>();
-		kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------K
+		kanditatiPotezeKrajsi = new HashSet<Koordinati>();
 		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
-		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
-		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); //<-------------------K
+		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); 
+			// Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
+		
+		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2));
+		
 		
 		//napolni mozne poteze
 		for ( int x = 0; x < velikost; x++ ) { 
@@ -103,11 +105,13 @@ public class Igra {
 	public Igra(Igra igra) {
 		// !! ne sme biti this.plosca = igra.plosca , seznama imata isto mesto v pomnilniku
 		
-		this.zmagovalnaVrsta = new LinkedList<Koordinati>();
+		this.naPotezi = igra.naPotezi;
+		this.stanje = igra.stanje;
 		
+		this.zmagovalnaVrsta = new LinkedList<Koordinati>();
 		this.moznePoteze = new LinkedList<Koordinati>();
 		this.odigranePoteze = new LinkedList<Koordinati>();
-		this.stanje = igra.stanje;
+		
 		
 		this.plosca = new Polje[Igra.velikost][Igra.velikost];
 		for (int i = 0; i < Igra.velikost; i++) {
@@ -117,14 +121,13 @@ public class Igra {
 				this.plosca[i][j] = igra.plosca[i][j];
 			}
 		}
-		this.naPotezi = igra.naPotezi;
 		
 		this.kanditatiPoteze = new HashSet<Koordinati>();
 		for (Koordinati p : igra.kanditatiPoteze) {
 			this.kanditatiPoteze.add(p);
 		}
 		
-		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------
+		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>();
 		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
 			this.kanditatiPotezeKrajsi.add(p);
 		}
@@ -137,16 +140,16 @@ public class Igra {
 	/**
 	 * Koordinata.y vrsta, koordinata.x stolpec, -> plosca[y-vrsta][x-vrsta]
 	 * Ko dostopamo do Polja v seznamu plosca je prvi indeks vrsta(Y), drugi indeks stolpec(X)
-	 *(0,0) je levi zgornji kot plosce
+	 * (0,0) je levi zgornji kot plosce / (14,14) desni spodnji kot.
 	 */
 	
 	// =========================================
 	
-	public int pozitivna(int x) { return (x < 0) ? 0 : x ; } 
+public int pozitivna(int x) { return (x < 0) ? 0 : x ; } // <-- Uporabljena??
 	//Pomozna funkcija, če je negativni int vrne 0, drugače int
 	
 	public boolean pomozna (int v0, int s0, int dv, int ds) {
-	//Od zaceetnega polja (v0,s0) preveri koliko v vrsto jih je v smeri (dv,ds) in (-dv,-ds)
+	//Od zacetnega polja (v0,s0) preveri koliko v vrsto jih je v smeri (dv,ds) in (-dv,-ds)
 		zmagovalnaVrsta.clear();
 		zmagovalnaVrsta.add(new Koordinati(s0,v0));
 		Polje primerjava = plosca[v0][s0];
@@ -199,13 +202,11 @@ public class Igra {
 		}
 	}
 	
-	public void naslednji() {
-	//Spremeni igralca, ki je napotezi
-		if (naPotezi.equals(Igralec.X)) {
-			naPotezi = Igralec.O;	
-		} 
-		else naPotezi = Igralec.X;
+	public void naslednji() { 
+		//Spremeni igralca, ki je napotezi
+		naPotezi = (naPotezi == Igralec.X) ? Igralec.O : Igralec.X;
 	}
+	
 	
 	public boolean jeLegalna(Koordinati poteza) {
 	//Preveri če je poteza legalna
