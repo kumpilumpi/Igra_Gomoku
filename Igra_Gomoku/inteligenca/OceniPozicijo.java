@@ -141,13 +141,13 @@ public class OceniPozicijo {
 			case 4:	
 				if (soStiri) {
 					soStiri = false;
-					return 1000;
+					return 27;
 				}
 				soStiri = true;
-				return 81;
+				return 27;
 			case 5: 
 				soStiri = false;
-				return 1000;
+				return 81;
 			
 		}
 		return zaporednih;
