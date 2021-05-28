@@ -87,7 +87,7 @@ public class Igra {
 				}
 			}
 		
-		naPotezi = Igralec.X;
+		naPotezi = Igralec.O;
 	}
 
 	// Za ustvarjanje kopije igre
