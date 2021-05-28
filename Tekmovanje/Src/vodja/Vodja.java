@@ -1,23 +1,22 @@
 package vodja;
 
 import java.util.Map;
+
 import javax.swing.SwingWorker;
-import java.util.concurrent.TimeUnit;
-import vmesniki.Okno;
+
 import inteligenca.AlfaBeta;
 import inteligenca.Inteligenca;
 import inteligenca.InteligencaPomozna;
-import inteligenca.Minimax;
-import inteligenca.Nakljucna;
 import logika.Igra;
 import logika.Igralec;
 import logika.Stanje;
+import splosno.KdoIgra;
 
 //import inteligenca.Minimax ;
 //import inteligenca.RandomMinimax;
 
 import splosno.Koordinati;
-import splosno.KdoIgra;
+import vmesniki.Okno;
 
 public class Vodja {	
 	

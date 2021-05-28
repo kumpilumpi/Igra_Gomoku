@@ -1,12 +1,20 @@
 package vmesniki;
 
-import logika.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
+
+import logika.Igra;
+import logika.Polje;
+import logika.Stanje;
 import splosno.Koordinati;
 import vodja.Vodja;
-import vmesniki.Okno;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 @SuppressWarnings("serial")
 //preuredil strukturo programa po profesorjevem zgledu

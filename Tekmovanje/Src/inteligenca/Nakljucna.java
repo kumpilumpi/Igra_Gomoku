@@ -1,8 +1,4 @@
 package inteligenca;
-import java.util.Random;
-import java.util.Set;
-import java.util.LinkedList;
-
 import logika.Igra;
 import splosno.Koordinati;
 

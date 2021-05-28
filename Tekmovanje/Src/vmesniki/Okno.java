@@ -8,12 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EnumMap;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
-import vodja.Vodja;
-import vodja.VrstaIgralca;
 import logika.Igralec;
 import logika.Stanje;
+import vodja.Vodja;
+import vodja.VrstaIgralca;
 
 
 @SuppressWarnings("serial")

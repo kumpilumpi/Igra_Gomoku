@@ -1,8 +1,10 @@
 package vmesniki;
-import logika.*;
-
-import splosno.Koordinati;
 import java.util.Scanner;
+
+import logika.Igra;
+import logika.Polje;
+import logika.Stanje;
+import splosno.Koordinati;
 
 
 // Vmesnik, ki v terminal izpisuje zadeve
