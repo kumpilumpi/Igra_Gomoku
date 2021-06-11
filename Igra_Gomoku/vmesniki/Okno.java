@@ -18,11 +18,8 @@ import logika.Stanje;
 
 @SuppressWarnings("serial")
 public class Okno extends JFrame implements ActionListener {
-	/**
-	 * JPanel, v katerega igramo
-	 */
+	
 	private Platno platno;
-
 	
 	//Statusna vrstica v spodnjem delu okna
 	private JLabel status;
@@ -37,6 +34,8 @@ public class Okno extends JFrame implements ActionListener {
 	private JMenuItem crniRand;
 	private JMenuItem beliMinimax;
 	private JMenuItem crniMinimax;
+	private JMenuItem beliAlfa;
+	private JMenuItem crniAlfa;
 	private JMenuItem suspend;
 	
 	public VrstaIgralca random;
@@ -92,21 +91,29 @@ public class Okno extends JFrame implements ActionListener {
 		JMenu crni_menu = new JMenu("Črni Igralec");
 		intel_menu.add(crni_menu);		
 
-		beliRand = new JMenuItem("Minimax");
+		beliRand = new JMenuItem("Naključno");
 		beli_menu.add(beliRand);
 		beliRand.addActionListener(this);
 		
-		crniRand = new JMenuItem("Minimax");
+		crniRand = new JMenuItem("Naključno");
 		crni_menu.add(crniRand);
 		crniRand.addActionListener(this);
 		
-		beliMinimax = new JMenuItem("AlfaBeta");
+		beliMinimax = new JMenuItem("Minimax");
 		beli_menu.add(beliMinimax);
 		beliMinimax.addActionListener(this);
 		
-		crniMinimax = new JMenuItem("AlfaBeta");
+		crniMinimax = new JMenuItem("Minimax");
 		crni_menu.add(crniMinimax);
 		crniMinimax.addActionListener(this);
+		
+		beliAlfa = new JMenuItem("AlfaBeta");
+		beli_menu.add(beliAlfa);
+		beliAlfa.addActionListener(this);
+		
+		crniAlfa = new JMenuItem("AlfaBeta");
+		crni_menu.add(crniAlfa);
+		crniAlfa.addActionListener(this);
 		
 		// igralno  polje
 		platno = new Platno();
@@ -177,21 +184,31 @@ public class Okno extends JFrame implements ActionListener {
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == beliRand) {
-			beli = VrstaIgralca.minimax;
-			status.setText("Beli igralec igra z Minimax.");
+			beli = VrstaIgralca.random;
+			status.setText("Beli igralec igra naključno.");
 		}
 		
 		else if (Vodja.igra == null && e.getSource() == crniRand) {
+			status.setText("Črni igralec igra naključno.");
+			crni = VrstaIgralca.random;
+		}
+		
+		else if (Vodja.igra == null && e.getSource() == beliMinimax) {
+			status.setText("Beli igralec igra z Minimax.");
+			beli = VrstaIgralca.minimax;
+		}
+		
+		else if (Vodja.igra == null && e.getSource() == crniMinimax) {
 			status.setText("Črni igralec igra z Minimax.");
 			crni = VrstaIgralca.minimax;
 		}
 		
-		else if (Vodja.igra == null && e.getSource() == beliMinimax) {
+		else if (Vodja.igra == null && e.getSource() == beliAlfa) {
 			status.setText("Beli igralec igra z AlfaBeta.");
 			beli = VrstaIgralca.alfabeta;
 		}
 		
-		else if (Vodja.igra == null && e.getSource() == crniMinimax) {
+		else if (Vodja.igra == null && e.getSource() == crniAlfa) {
 			status.setText("Črni igralec igra z AlfaBeta.");
 			crni = VrstaIgralca.alfabeta;
 		}
