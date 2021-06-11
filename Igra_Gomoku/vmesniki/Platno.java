@@ -13,9 +13,9 @@ import javax.swing.*;
 class Platno extends JPanel implements MouseListener {
 	public Platno() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		Color barvaPlosce = new Color(191, 128, 255);
+		Color barvaPlosce = new Color(191, 128, 255); // custom barva
 		this.setBackground(barvaPlosce);
-		this.addMouseListener(this);
+		this.addMouseListener(this); // Listen own mouse events.
 	}
 	public static Okno okno;
 	private static final int ROWS = Igra.velikost;
@@ -29,11 +29,11 @@ class Platno extends JPanel implements MouseListener {
 	//============================================== paintComponent
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		Color barvaSvetel = new Color(255, 255, 179);
-		Color barvaTemen = new Color(0, 0, 38);
+		Graphics2D g2 = (Graphics2D) g; //graphics 2d 
+		Color barvaSvetel = new Color(255, 255, 179); // custom svetla barva
+		Color barvaTemen = new Color(0, 0, 38); // custom temna barva
 		Color barvaZmaga = new Color(255, 160, 128);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
 				
 		//-- Izris mreže.
 		WIDTH = getWidth();
@@ -41,7 +41,7 @@ class Platno extends JPanel implements MouseListener {
 		CELL_WIDTH = WIDTH/Igra.velikost;
 		CELL_HEIGHT = HEIGHT/Igra.velikost;;
 		
-		for (int r=1; r<ROWS; r++) {
+		for (int r=1; r<ROWS; r++) {        //vodoravne crte
 			g2.drawLine(0, r*CELL_HEIGHT, WIDTH, r*CELL_HEIGHT);
 		}
 		for (int c=1; c<COLS; c++) {
@@ -75,6 +75,7 @@ class Platno extends JPanel implements MouseListener {
 		}		
 	}
  
+	//======================================== listener mousePressed
 	@Override
 	public void mousePressed(MouseEvent e) {
 		//--- map x,y coordinates into a row and col.
@@ -85,6 +86,7 @@ class Platno extends JPanel implements MouseListener {
 		
      
 	}
+	//========================================== ignore these events
 	public void mouseClicked (MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered (MouseEvent e) {}
