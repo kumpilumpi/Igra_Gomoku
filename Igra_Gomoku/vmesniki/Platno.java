@@ -9,13 +9,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-//preuredil strukturo programa po profesorjevem zgledu
+
 class Platno extends JPanel implements MouseListener {
 	public Platno() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		Color barvaPlosce = new Color(191, 128, 255); // custom barva
+		Color barvaPlosce = new Color(191, 128, 255);
 		this.setBackground(barvaPlosce);
-		this.addMouseListener(this); // Listen own mouse events.
+		this.addMouseListener(this);
 	}
 	public static Okno okno;
 	private static final int ROWS = Igra.velikost;
@@ -29,11 +29,11 @@ class Platno extends JPanel implements MouseListener {
 	//============================================== paintComponent
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g; //graphics 2d 
-		Color barvaSvetel = new Color(255, 255, 179); // custom svetla barva
-		Color barvaTemen = new Color(0, 0, 38); // custom temna barva
+		Graphics2D g2 = (Graphics2D) g;
+		Color barvaSvetel = new Color(255, 255, 179);
+		Color barvaTemen = new Color(0, 0, 38);
 		Color barvaZmaga = new Color(255, 160, 128);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //gladki robovi
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				
 		//-- Izris mreže.
 		WIDTH = getWidth();
@@ -41,7 +41,7 @@ class Platno extends JPanel implements MouseListener {
 		CELL_WIDTH = WIDTH/Igra.velikost;
 		CELL_HEIGHT = HEIGHT/Igra.velikost;;
 		
-		for (int r=1; r<ROWS; r++) {        //vodoravne crte
+		for (int r=1; r<ROWS; r++) {
 			g2.drawLine(0, r*CELL_HEIGHT, WIDTH, r*CELL_HEIGHT);
 		}
 		for (int c=1; c<COLS; c++) {
@@ -75,7 +75,6 @@ class Platno extends JPanel implements MouseListener {
 		}		
 	}
  
-	//======================================== listener mousePressed
 	@Override
 	public void mousePressed(MouseEvent e) {
 		//--- map x,y coordinates into a row and col.
@@ -86,10 +85,9 @@ class Platno extends JPanel implements MouseListener {
 		
      
 	}
-	//========================================== ignore these events
 	public void mouseClicked (MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered (MouseEvent e) {}
 	public void mouseExited  (MouseEvent e) {}
  	
-}//end class Platno
+}
