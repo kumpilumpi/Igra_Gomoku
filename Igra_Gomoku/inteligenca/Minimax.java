@@ -25,8 +25,6 @@ public class Minimax extends InteligencaPomozna {
 	public Koordinati izberiPotezo (Igra igra) {
 	//Pokliče minimax, ki poišče najboljšo potezo
 		OcenjenaPoteza najboljsaPoteza = minimax(igra, this.globina, igra.naPotezi);
-
-		System.out.println(najboljsaPoteza); // <- preverjanje
 		
 		return najboljsaPoteza.poteza;	
 	}

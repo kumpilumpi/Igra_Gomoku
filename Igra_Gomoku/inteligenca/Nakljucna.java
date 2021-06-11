@@ -12,7 +12,6 @@ public class Nakljucna extends InteligencaPomozna {
 		super("Naključna");
 	}
 
-
 	@Override
 	public Koordinati izberiPotezo(Igra igra) {
 		Random rand = new Random();

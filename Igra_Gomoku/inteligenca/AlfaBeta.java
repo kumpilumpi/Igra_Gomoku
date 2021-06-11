@@ -25,13 +25,10 @@ public class AlfaBeta extends InteligencaPomozna {
 	@Override
 	public Koordinati izberiPotezo (Igra igra) {
 	//Pokliče minimax, ki poišče najboljšo potezo
-		OcenjenaPoteza najboljsaPoteza = alfaBeta(igra, this.globina, ZGUBA, ZMAGA,igra.naPotezi);
-
-		System.out.println(najboljsaPoteza); // <- preverjanje
-		System.out.println(igra.kanditatiPoteze.size() + "  " + igra.kanditatiPotezeKrajsi.size());
-		
+		OcenjenaPoteza najboljsaPoteza = alfaBeta(igra, this.globina, ZGUBA, ZMAGA,igra.naPotezi);		
 		return najboljsaPoteza.poteza;	
 	}
+	
 	
 	//alfa največja
 	
@@ -44,7 +41,7 @@ public class AlfaBeta extends InteligencaPomozna {
 		najboljsaPoteza = new OcenjenaPoteza(igra.kanditatiPoteze.iterator().next(), (igra.naPotezi == jaz) ? ZGUBA : ZMAGA);
 			// igra.moznePoteze.get(0), samo, da je nekaj za začetek ali ko ve da izgubi, vseeno odigra kaj
 		
-		for (Koordinati p : igra.kanditatiPoteze) { // <--------- igra.kanditatiPotezeKrajsi
+		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
 			
 			int ocena;
 			Igra kopijaIgre = new Igra(igra);

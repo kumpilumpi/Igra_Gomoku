@@ -33,7 +33,7 @@ public class Inteligenca extends KdoIgra {
 		
 		
 		//Pokliči alfaBeta - glede na stanje igre (koliko potez je bilo odigranih)
-		
+
 		InteligencaPomozna racunalnikovaInteligenca;
 		
 		if (igra.kanditatiPotezeKrajsi.size() < 30 ) {

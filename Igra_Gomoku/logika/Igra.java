@@ -19,7 +19,7 @@ public class Igra {
 	public LinkedList<Koordinati> moznePoteze; //ne vem če sploh kaj rabva
 	
 	public Set<Koordinati> kanditatiPoteze; // Kandidati za inteligenco
-	public Set<Koordinati> kanditatiPotezeKrajsi; // <----------------------K
+	public Set<Koordinati> kanditatiPotezeKrajsi;
 	
 	public LinkedList<Koordinati> zmagovalnaVrsta; // Za obarvanje zmagovalne petorke
 
@@ -78,8 +78,8 @@ public class Igra {
 		kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------K
 		zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
-		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // Da se vsaj en kandidat nahaj notr v seznamu, da lahko začne
-		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); //<-------------------K
+		kanditatiPoteze.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); // Vsaj en kandidat, da lahko nekje začne
+		kanditatiPotezeKrajsi.add(new Koordinati(Igra.velikost/2, Igra.velikost/2)); 
 		
 		//napolni mozne poteze
 		for ( int x = 0; x < velikost; x++ ) { 
@@ -101,7 +101,6 @@ public class Igra {
 
 	// Za ustvarjanje kopije igre
 	public Igra(Igra igra) {
-		// !! ne sme biti this.plosca = igra.plosca , seznama imata isto mesto v pomnilniku
 		
 		this.zmagovalnaVrsta = new LinkedList<Koordinati>();
 		
@@ -124,7 +123,7 @@ public class Igra {
 			this.kanditatiPoteze.add(p);
 		}
 		
-		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>(); // <----------------------
+		this.kanditatiPotezeKrajsi = new HashSet<Koordinati>();
 		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
 			this.kanditatiPotezeKrajsi.add(p);
 		}
@@ -278,8 +277,5 @@ public class Igra {
 		}
 	}
 
-	
-	
-	
-	
+
 }
