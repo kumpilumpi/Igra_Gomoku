@@ -1,18 +1,25 @@
 package inteligenca;
 
 import logika.Igra;
-import logika.Igralec;
-import splosno.Koordinati;
 import splosno.KdoIgra;
+import splosno.Koordinati;
 
-public class Inteligenca extends KdoIgra { 
+public class Inteligenca extends KdoIgra {
+	
+	public Inteligenca() {
+		super("TeoJaka");
+	}
 	
 	public Inteligenca (String ime) {
 		super(ime);
 	}
 	
+    // Vračanje odgovora na tekmovanju
 	public Koordinati izberiPotezo(Igra igra) {
-		// vračanje odgovora za tekmovanje
+		
+		
+		//ker alfa beta noče zaključit zmagovalne poteze
+		//odigra potezo, če ta prinese zmago ali bi prinesla poraz
 		
 		for (Koordinati p : igra.kanditatiPotezeKrajsi) {
 			Igra kopijaIgre = new Igra(igra);
@@ -20,25 +27,25 @@ public class Inteligenca extends KdoIgra {
 			switch (kopijaIgre.stanje) {
 				case ZMAGA_O: return p;
 				case ZMAGA_X: return p;
-			default:
-				break;
+				default: continue;
 			}
 		}
 		
-		//Pokliči alfaBeta
 		
+		//Pokliči alfaBeta - glede na stanje igre (koliko potez je bilo odigranih)
 		
+		InteligencaPomozna racunalnikovaInteligenca;
 		
+		if (igra.kanditatiPotezeKrajsi.size() < 30 ) {
+			racunalnikovaInteligenca = new AlfaBeta(4);
+		}
+		else {
+			racunalnikovaInteligenca = new AlfaBeta(3);
+		}
+		Koordinati poteza = racunalnikovaInteligenca.izberiPotezo(igra);
 		
+		return poteza;
 		
-			
-			
-		// uporaba alfaBeta algoritma
-		// Določit parametre ocene
-		// 
-		
-		
-		return null;
 		
 	}
 }
